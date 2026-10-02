@@ -1,46 +1,62 @@
 import ScrollReveal from '../ScrollReveal/ScrollReveal'
-
+import Velaris from '../ui/Velaris'
 
 function HotelsHero() {
   return (
-    
-    <section className="relative flex min-h-105 items-end overflow-hidden sm:min-h-125">
+    <section className="relative min-h-[680px] overflow-hidden bg-[#080808] sm:min-h-[720px]">
 
-      {/* Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/images/hotels-hero.webp')",
-        }}
-      />
+      {/* Animated Background */}
+      <div className="absolute inset-0 z-0">
+        <Velaris
+          height="720px"
+          speed={0.75}
+          grain={0.18}
+          bg="#080808"
+          colors={[
+            "#8b7355",
+            "#c5a880",
+            "#3f352b",
+            "#111111",
+          ]}
+          className="h-full w-full"
+        />
+      </div>
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/45" />
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#080808]/95 via-[#080808]/45 to-transparent" />
 
-      {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-16 pt-36 lg:px-10 lg:pb-20">
+      {/* Hero Content */}
+      <div className="relative z-20 mx-auto flex min-h-[680px] w-full max-w-7xl items-center px-6 py-28 lg:min-h-[720px] lg:px-10">
 
         <ScrollReveal>
+          <div className="max-w-3xl">
 
-          <p className="text-xs uppercase tracking-[0.3em] text-white/60">
-            Discover your next stay
-          </p>
+            <div className="mb-8 flex items-center gap-4">
+              <span className="h-px w-12 bg-[#C5A880]" />
 
-          <h1 className="mt-5 max-w-3xl font-serif text-5xl leading-tight text-white sm:text-6xl lg:text-7xl">
-            Places worth
-            <span className="block italic">
-              staying.
-            </span>
-          </h1>
+              <p className="text-[10px] uppercase tracking-[0.4em] text-[#C5A880] sm:text-xs">
+                Stayora Collection
+              </p>
+            </div>
 
-          <p className="mt-6 max-w-xl text-sm leading-7 text-white/70 sm:text-base">
-            Discover beautiful hotels, unique stays and unforgettable
-            places around the world.
-          </p>
+            <h1 className="font-serif text-5xl leading-[0.95] tracking-tight text-[#F5F1EA] sm:text-7xl lg:text-[92px]">
+              Find a place
+              <span className="mt-2 block italic text-[#C5A880]">
+                worth staying.
+              </span>
+            </h1>
 
+            <p className="mt-8 max-w-lg text-sm leading-7 text-white/60 sm:text-base">
+              From quiet escapes to extraordinary city stays,
+              discover places designed to make every journey memorable.
+            </p>
+
+          </div>
         </ScrollReveal>
 
       </div>
+
+     
 
     </section>
   )
