@@ -26,7 +26,7 @@ function Hero() {
 
         <div className="max-w-3xl">
 
-          <p className="mb-5 animate-fade-up text-sm uppercase tracking-[0.3em] text-white/80 [animation-delay:200ms]">
+          <p className="mb-5 mt-1 animate-fade-up text-sm uppercase tracking-[0.3em] text-white/80 [animation-delay:200ms]">
             Discover extraordinary stays
           </p>
 
