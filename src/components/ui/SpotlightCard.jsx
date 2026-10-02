@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from 'react'
 
 const glowColorMap = {
@@ -94,7 +95,9 @@ function SpotlightCard({
     border: 'var(--border-size) solid var(--backup-border)',
 
     position: 'relative',
-    touchAction: 'none',
+
+    // تغییر داده شد تا اسکرول لمسی موبایل مسدود نشود
+    touchAction: 'auto',
 
     ...(width !== undefined && {
       width: typeof width === 'number' ? `${width}px` : width,
@@ -190,7 +193,7 @@ function SpotlightCard({
           ${!customSize ? 'aspect-3/4' : ''}
           relative
           overflow-hidden
-          
+
           shadow-[0_1rem_2rem_-1rem_rgba(11,11,11,0.45)]
           backdrop-blur-[5px]
           ${className}
