@@ -64,7 +64,30 @@ function PopularDestinations() {
                 className="group block h-full"
               >
 
-                <div>
+                <SpotlightCard
+                  customSize
+                  width="100%"
+                  height="360px"
+                  glowColor="orange"
+                  className="
+                    h-90
+                    w-full
+                    overflow-hidden
+                    
+                    border
+                    border-[#D8CCBA]
+                    bg-[#0B0B0B]
+
+                    shadow-[12px_17px_51px_rgba(11,11,11,0.12)]
+
+                    transition-all
+                    duration-500
+                    ease-out
+
+                    group-hover:border-[#C5A880]
+                    group-hover:shadow-[0_0_0_1px_#C5A880,0_0_30px_rgba(197,168,128,0.35)]
+                  "
+                >
 
                   {/* Image */}
                   <div className="absolute inset-x-0 top-0 h-[58%] overflow-hidden">
@@ -153,7 +176,7 @@ function PopularDestinations() {
 
                   </div>
 
-                </div>
+                </SpotlightCard>
 
               </Link>
 
