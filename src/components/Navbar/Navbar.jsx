@@ -19,7 +19,7 @@ function Navbar() {
     <header className="absolute left-0 top-0 z-50 w-full animate-[fadeDown_0.8s_ease-out] bg-[#0B0B0B]/95 backdrop-blur-md">
 
       
-<nav className="mx-auto flex w-full max-w-[1600px] items-center justify-between px-6 py-5 lg:px-10 xl:px-14 2xl:px-16">
+<nav className="mx-auto flex w-full max-w-1600 items-center justify-between px-6 py-5 lg:px-10 xl:px-14 2xl:px-16">
 
         {/* Logo */}
         <Link
