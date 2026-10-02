@@ -22,11 +22,13 @@ function Hero() {
       />
 
       {/* Hero Content */}
-      <div className="absolute inset-0 z-10 mx-auto flex w-full max-w-7xl items-center px-6 py-32 lg:px-10">
+      // Hero.jsx
+
+        <div className="absolute inset-0 z-10 mx-auto flex w-full max-w-7xl items-center px-6 pt-32 pb-20 sm:pt-40 md:pt-44 lg:px-10 lg:py-32">
 
         <div className="max-w-3xl">
 
-          <p className="mb-5 mt-1 animate-fade-up text-sm uppercase tracking-[0.3em] text-white/80 [animation-delay:200ms]">
+          <p className="mb-5 animate-fade-up text-sm uppercase tracking-[0.3em] text-white/80 [animation-delay:200ms]">
             Discover extraordinary stays
           </p>
 
