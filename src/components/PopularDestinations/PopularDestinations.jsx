@@ -1,7 +1,7 @@
+
 import { Link } from 'react-router-dom'
 import { destinations } from '../../data/destinations'
 import ScrollReveal from '../ScrollReveal/ScrollReveal'
-import SpotlightCard from '../ui/SpotlightCard'
 
 function PopularDestinations() {
   return (
@@ -64,16 +64,13 @@ function PopularDestinations() {
                 className="group block h-full"
               >
 
-                <SpotlightCard
-                  customSize
-                  width="100%"
-                  height="360px"
-                  glowColor="orange"
+                <div
                   className="
+                    relative
                     h-90
                     w-full
                     overflow-hidden
-                    
+
                     border
                     border-[#D8CCBA]
                     bg-[#0B0B0B]
@@ -128,9 +125,10 @@ function PopularDestinations() {
                       inset-x-0
                       bottom-0
                       h-[42%]
-                     bg-[#D0C2AF]
+                      bg-[#D0C2AF]
                     "
                   />
+
 
                   {/* Champagne Accent */}
                   <div
@@ -166,7 +164,7 @@ function PopularDestinations() {
                     {/* Discover */}
                     <div className="mt-4 flex items-center gap-3">
 
-                      <span className="h-px w-7 bg-[#8B7355] transition-all duration-500 group-hover:w-12 " />
+                      <span className="h-px w-7 bg-[#8B7355] transition-all duration-500 group-hover:w-12" />
 
                       <span className="text-[10px] uppercase tracking-[0.2em] text-white/50 transition-colors duration-300 group-hover:text-white/80">
                         Discover
@@ -176,7 +174,7 @@ function PopularDestinations() {
 
                   </div>
 
-                </SpotlightCard>
+                </div>
 
               </Link>
 
