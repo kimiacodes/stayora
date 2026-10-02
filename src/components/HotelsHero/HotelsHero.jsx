@@ -3,7 +3,7 @@ import Velaris from '../ui/Velaris'
 
 function HotelsHero() {
   return (
-    <section className="relative min-h-[680px] overflow-hidden bg-[#080808] sm:min-h-[720px]">
+    <section className="relative min-h-170 overflow-hidden bg-[#080808] sm:min-h-180">
 
       {/* Animated Background */}
       <div className="absolute inset-0 z-0">
@@ -23,10 +23,10 @@ function HotelsHero() {
       </div>
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#080808]/95 via-[#080808]/45 to-transparent" />
+      <div className="absolute inset-0 z-10 bg-linear-to-r from-[#080808]/95 via-[#080808]/45 to-transparent" />
 
       {/* Hero Content */}
-      <div className="relative z-20 mx-auto flex min-h-[680px] w-full max-w-7xl items-center px-6 py-28 lg:min-h-[720px] lg:px-10">
+      <div className="relative z-20 mx-auto flex min-h-170 w-full max-w-7xl items-center px-6 py-28 lg:min-h-180 lg:px-10">
 
         <ScrollReveal>
           <div className="max-w-3xl">
