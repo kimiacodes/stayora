@@ -8,7 +8,7 @@ function Hero() {
 
       {/* Animated Background */}
       <Velaris
-        height="780px"
+        height="740px"
         speed={1.2}
         grain={0.2}
         bg="#080808"
