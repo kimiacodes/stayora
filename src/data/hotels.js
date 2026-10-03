@@ -11,6 +11,11 @@ export const hotels = [
       '/images/hotel-1.webp',
       '/images/hotel-1-2.webp',
       '/images/hotel-1-3.webp',
+      '/images/hotel-1-4.webp',
+      '/images/hotel-1-5.webp',
+      '/images/hotel-1-6.webp',
+      '/images/hotel-1-7.webp',
+      '/images/hotel-1-8.webp'
     ],
     description:
       'A refined stay in the heart of Paris, combining timeless architecture, elegant interiors and exceptional hospitality.',
