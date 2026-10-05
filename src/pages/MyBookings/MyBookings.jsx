@@ -75,6 +75,7 @@ function MyBookings() {
   return (
     <main className="min-h-screen bg-[#F5F1EA] px-5 pb-24 pt-28 sm:px-8 lg:px-10 lg:pt-36">
       <div className="mx-auto max-w-6xl">
+
         {/* Header */}
         <header className="border-b border-[#D8D0C4] pb-10 lg:pb-12">
           <div className="flex items-center gap-3">
@@ -108,21 +109,76 @@ function MyBookings() {
           </div>
         </header>
 
-        {/* Sort bookings */}
-        <div className="mt-8 flex items-center justify-end gap-3">
-          <span className="text-[9px] uppercase tracking-[0.25em] text-[#8B7355]">
-            Sort by
-          </span>
+        
+{/* Sort bookings */}
+<div className="mt-8 flex items-center justify-end gap-4">
+  <span className="text-[9px] uppercase tracking-[0.3em] text-[#8B7355]">
+    Sort by
+  </span>
 
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-            className="cursor-pointer border-b border-[#C9B38E] bg-transparent px-1 pb-2 text-[10px] uppercase tracking-[0.15em] text-[#171411] outline-none transition-colors duration-300 focus:border-[#8B7355]"
-          >
-            <option value="newest">Newest first</option>
-            <option value="oldest">Oldest first</option>
-          </select>
-        </div>
+  <div className="relative">
+    <select
+      value={sortOrder}
+      onChange={(e) => setSortOrder(e.target.value)}
+      className="
+        min-w-[150px]
+        cursor-pointer
+        appearance-none
+        border
+        border-[#C9B38E]
+        bg-[#EEE7DC]
+        px-4
+        py-3
+        pr-10
+        text-[10px]
+        uppercase
+        tracking-[0.15em]
+        text-[#171411]
+        shadow-[0_4px_15px_rgba(70,50,30,0.06)]
+        outline-none
+        transition-all
+        duration-300
+        hover:border-[#8B7355]
+        hover:bg-[#E8DFD1]
+        hover:shadow-[0_6px_20px_rgba(70,50,30,0.1)]
+        focus:border-[#8B7355]
+        focus:shadow-[0_0_0_2px_rgba(139,115,85,0.12)]
+      "
+    >
+      <option
+        value="newest"
+        className="bg-[#F5F1EA] text-[#171411]"
+      >
+        Newest first
+      </option>
+
+      <option
+        value="oldest"
+        className="bg-[#F5F1EA] text-[#171411]"
+      >
+        Oldest first
+      </option>
+    </select>
+
+    {/* Custom arrow */}
+    <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#8B7355]">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        className="h-3.5 w-3.5"
+      >
+        <path
+          fillRule="evenodd"
+          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+          clipRule="evenodd"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+
+
 
         {/* Bookings */}
         <div className="mt-7 space-y-5 lg:mt-9">
@@ -152,30 +208,66 @@ function MyBookings() {
             return (
               <article
                 key={booking.id}
-                className="group overflow-hidden border border-[#C9B38E] bg-[#C5A880] shadow-[0_8px_30px_rgba(70,50,30,0.07)] transition-all duration-500 hover:shadow-[0_14px_40px_rgba(70,50,30,0.12)]"
+                className="group relative overflow-hidden border border-[#C9B38E] bg-[#C5A880] shadow-[0_8px_30px_rgba(70,50,30,0.07)] transition-all duration-500 hover:shadow-[0_14px_40px_rgba(70,50,30,0.12)]"
               >
-                <div className="flex flex-col gap-0 sm:flex-row">
+                {/* 
+                  Mobile + Small screens:
+                  Image on top / Booking information below
+
+                  Medium screens and above:
+                  Image on left / Booking information on right
+                */}
+                <div className="flex flex-col gap-0 md:flex-row">
+
                   {/* Small image */}
-                  <div className="relative m-3 h-[220px] shrink-0 overflow-hidden sm:h-[230px] sm:w-[250px] lg:h-[245px] lg:w-[280px]">
-                    <img
-                      src={hotel.image}
-                      alt={hotel.name}
-                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    />
+                  
+{/* Image */}
+<div
+  className="
+    relative
+    m-5
+    h-[220px]
+    shrink-0
+    overflow-hidden
+    rounded-sm
+    shadow-[0_12px_30px_rgba(11,11,11,0.22)]
+    md:m-6
+    md:h-[230px]
+    md:w-[250px]
+    lg:h-[245px]
+    lg:w-[280px]
+  "
+>
+  <img
+    src={hotel.image}
+    alt={hotel.name}
+    className="
+      h-full
+      w-full
+      object-cover
+      transition-transform
+      duration-700
+      ease-out
+      group-hover:scale-105
+    "
+  />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
+  <div className="absolute inset-0 bg-gradient-to-t from-black/45 to-transparent" />
 
-                    <div className="absolute bottom-5 left-5">
-                      <p className="text-[9px] uppercase tracking-[0.25em] text-white/75">
-                        {hotel.city}, {hotel.country}
-                      </p>
-                    </div>
-                  </div>
+  <div className="absolute bottom-5 left-5">
+    <p className="text-[9px] uppercase tracking-[0.25em] text-white/75">
+      {hotel.city}, {hotel.country}
+    </p>
+  </div>
+</div>
+
+
 
                   {/* Content */}
-                  <div className="flex min-w-0 flex-1 flex-col justify-between px-6 py-6 sm:px-7 lg:px-9 lg:py-7">
+                  <div className="flex min-w-0 flex-1 flex-col justify-between px-6 py-6 md:px-7 lg:px-9 lg:py-7">
                     <div>
-                      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+
+                      <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
                         <div>
                           <h2 className="font-serif text-3xl leading-tight text-[#171411]">
                             {hotel.name}
@@ -186,7 +278,7 @@ function MyBookings() {
                           </p>
                         </div>
 
-                        <div className="shrink-0 sm:text-right">
+                        <div className="shrink-0 md:text-right">
                           <p className="text-[9px] uppercase tracking-[0.2em] text-[#171411]/55">
                             Total
                           </p>
@@ -195,19 +287,21 @@ function MyBookings() {
                             ${totalPrice}
                           </p>
 
-                          <button
-                            type="button"
-                            onClick={() => removeBooking(booking.id)}
-                            className="mt-3 text-[9px] uppercase tracking-[0.2em] text-[#171411]/50 transition-colors duration-300 hover:text-[#7A4B3A]"
-                          >
-                            Cancel reservation
-                          </button>
+
+
+
+
+
+
+
+
                         </div>
                       </div>
 
                       {/* Booking details */}
-                      <div className="mt-6 grid grid-cols-2 gap-y-5 border-t border-[#171411]/15 pt-5 sm:grid-cols-4 sm:gap-0">
-                        <div className="sm:border-r sm:border-[#171411]/15 sm:pr-5">
+                      <div className="mt-6 grid grid-cols-2 gap-y-5 border-t border-[#171411]/15 pt-5 md:grid-cols-4 md:gap-0">
+
+                        <div className="md:border-r md:border-[#171411]/15 md:pr-5">
                           <p className="text-[8px] uppercase tracking-[0.2em] text-[#171411]/50">
                             Check in
                           </p>
@@ -217,7 +311,7 @@ function MyBookings() {
                           </p>
                         </div>
 
-                        <div className="sm:border-r sm:border-[#171411]/15 sm:px-5">
+                        <div className="md:border-r md:border-[#171411]/15 md:px-5">
                           <p className="text-[8px] uppercase tracking-[0.2em] text-[#171411]/50">
                             Check out
                           </p>
@@ -227,7 +321,7 @@ function MyBookings() {
                           </p>
                         </div>
 
-                        <div className="sm:border-r sm:border-[#171411]/15 sm:px-5">
+                        <div className="md:border-r md:border-[#171411]/15 md:px-5">
                           <p className="text-[8px] uppercase tracking-[0.2em] text-[#171411]/50">
                             Guests
                           </p>
@@ -237,7 +331,7 @@ function MyBookings() {
                           </p>
                         </div>
 
-                        <div className="sm:pl-5">
+                        <div className="md:pl-5">
                           <p className="text-[8px] uppercase tracking-[0.2em] text-[#171411]/50">
                             Nights
                           </p>
@@ -246,16 +340,71 @@ function MyBookings() {
                             {nights}
                           </p>
                         </div>
+
                       </div>
                     </div>
 
-                    <div className="mt-5 flex justify-end">
-                      <p className="text-[10px] tracking-wide text-[#51483E]">
+                    
+                  </div>
+
+                </div>
+                <div className=' m-3 flex justify-between items-center'>
+
+                  <div >
+                      <p className="text-xl m-2 tracking-wide text-[#51483E]">
                         ${hotel.price} / night
                       </p>
                     </div>
-                  </div>
-                </div>
+                <button
+  type="button"
+  onClick={() => removeBooking(booking.id)}
+  aria-label="Cancel reservation"
+  className="
+    group/bin
+    
+    
+    z-10
+    flex
+    flex-col
+    items-center
+    gap-1
+    
+  "
+>
+  <img
+    src="/bin.svg"
+    alt=""
+    className="
+      h-5
+      w-5
+      opacity-60
+      transition-all
+      duration-300
+      group-hover/bin:scale-110
+      group-hover/bin:opacity-100
+      group-hover/bin:[filter:brightness(0)_saturate(100%)_invert(24%)_sepia(82%)_saturate(1484%)_hue-rotate(333deg)_brightness(89%)_contrast(91%)]
+    "
+  />
+
+  <span
+    className="
+      max-h-0
+      overflow-hidden
+      text-[8px]
+      uppercase
+      tracking-[0.15em]
+      text-red-700
+      opacity-0
+      transition-all
+      duration-300
+      group-hover/bin:max-h-5
+      group-hover/bin:opacity-100
+    "
+  >
+    Cancel reservation
+  </span>
+</button>
+</div>
               </article>
             )
           })}
@@ -289,10 +438,10 @@ function MyBookings() {
             </Link>
           </div>
         </section>
+
       </div>
     </main>
   )
 }
 
 export default MyBookings
-
