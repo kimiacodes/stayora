@@ -1,4 +1,3 @@
-
 import { createContext, useContext, useEffect, useState } from 'react'
 
 const BookingContext = createContext()
@@ -47,11 +46,20 @@ export function BookingProvider({ children }) {
     ])
   }
 
+  function removeBooking(bookingId) {
+    setBookings((currentBookings) =>
+      currentBookings.filter(
+        (booking) => booking.id !== bookingId
+      )
+    )
+  }
+
   return (
     <BookingContext.Provider
       value={{
         bookings,
         addBooking,
+        removeBooking,
       }}
     >
       {children}
@@ -62,4 +70,3 @@ export function BookingProvider({ children }) {
 export function useBooking() {
   return useContext(BookingContext)
 }
-
