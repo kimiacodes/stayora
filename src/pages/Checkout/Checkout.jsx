@@ -1,6 +1,6 @@
 
 import { useMemo, useState } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 
 import { useAuth } from '../../context/AuthContext'
 import { useBooking } from '../../context/BookingContext'
@@ -8,7 +8,6 @@ import { hotels } from '../../data/hotels'
 
 function Checkout() {
   const [searchParams] = useSearchParams()
-  const navigate = useNavigate()
 
   const { user } = useAuth()
   const { addBooking } = useBooking()
@@ -62,27 +61,94 @@ function Checkout() {
 
   if (isConfirmed) {
     return (
-      <main className="flex min-h-screen items-center justify-center px-6 py-32">
-        <div className="max-w-xl text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-gray-500">
-            Reservation confirmed
-          </p>
+      <main className="relative min-h-screen overflow-hidden bg-[#F5F1EA] px-5 py-32 sm:px-8">
+        <div className="pointer-events-none absolute -left-32 top-20 h-80 w-80 rounded-full bg-[#C5A880]/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-[#8B7355]/10 blur-3xl" />
 
-          <h1 className="mt-4 font-serif text-5xl text-gray-900">
-            Thank you, {user?.firstName}.
-          </h1>
+        <div className="relative mx-auto flex min-h-[60vh] max-w-2xl items-center justify-center">
+          <div className="w-full border border-[#C5A880]/50 bg-[#F8F5F0]/80 px-6 py-12 text-center shadow-[0_30px_80px_rgba(60,45,30,0.08)] backdrop-blur-xl sm:px-14 sm:py-16">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-[#C5A880]">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#111111] text-xl text-[#C5A880]">
+                ✓
+              </div>
+            </div>
 
-          <p className="mt-6 text-sm leading-7 text-gray-500">
-            Your reservation at {hotel?.name} has been confirmed.
-            We look forward to welcoming you.
-          </p>
+            <p className="mt-9 text-[10px] font-medium uppercase tracking-[0.4em] text-[#8B7355]">
+              Reservation confirmed
+            </p>
 
-          <Link
-            to="/my-bookings"
-            className="mt-8 inline-block bg-gray-900 px-8 py-4 text-xs uppercase tracking-[0.2em] text-white transition hover:bg-gray-700"
+            <h1 className="mt-5 font-serif text-4xl leading-tight text-[#111111] sm:text-5xl">
+              Thank you, {user?.firstName}.
+            </h1>
+
+            <p className="mx-auto mt-6 max-w-md text-sm leading-7 text-[#77716A]">
+              Your stay at {hotel?.name} has been successfully
+              confirmed. We look forward to welcoming you.
+            </p>
+             <Link
+  to="/my-bookings"
+  className="mt-8 inline-flex items-center gap-3  px-6 py-3 text-[10px] uppercase tracking-[0.25em] text-[#8B7355] transition duration-300  hover:text-[#111111]"
+>
+  My Bookings
+  
+</Link>
+
+            <div className="mx-auto mt-8 h-px w-16 bg-[#C5A880]" />
+           
+
+             <Link
+            to="/hotels"
+            className="
+              group 
+              relative
+              mt-10
+              inline-flex
+              h-[2.9em]
+              w-[8.5em]
+              items-center
+              justify-end
+              rounded-[11px]
+              border-[0.2em]
+              border-[#8B7355]
+              bg-transparent
+              text-[#0B0B0B]
+              transition-all
+              duration-500
+              ease-in-out
+              hover:bg-[#C5A880]
+              hover:text-[#0B0B0B]
+            "
           >
-            Explore more stays
+
+            <span className="mr-[1.5em] text-xs">
+              Explore stays
+            </span>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              className="
+                absolute
+                left-[0.8em]
+                w-[1.6em]
+                transition-all
+                duration-500
+                ease-in-out
+                group-hover:translate-x-5px
+              "
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 12h14m-6-6 6 6-6 6"
+              />
+            </svg>
+
           </Link>
+          </div>
         </div>
       </main>
     )
@@ -90,19 +156,19 @@ function Checkout() {
 
   if (!hotel) {
     return (
-      <main className="flex min-h-screen items-center justify-center px-6 py-32">
+      <main className="flex min-h-screen items-center justify-center bg-[#F5F1EA] px-6 py-32">
         <div className="text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-gray-500">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-[#8B7355]">
             Checkout
           </p>
 
-          <h1 className="mt-4 font-serif text-4xl text-gray-900">
+          <h1 className="mt-5 font-serif text-4xl text-[#111111] sm:text-5xl">
             Reservation not found.
           </h1>
 
           <Link
             to="/hotels"
-            className="mt-8 inline-block text-xs uppercase tracking-[0.2em] text-gray-900 underline underline-offset-4"
+            className="mt-8 inline-block text-[10px] uppercase tracking-[0.25em] text-[#8B7355] underline underline-offset-8 transition hover:text-[#111111]"
           >
             Explore stays
           </Link>
@@ -112,134 +178,275 @@ function Checkout() {
   }
 
   return (
-    <main className="min-h-screen bg-white px-6 pb-20 pt-32 lg:px-10">
-      <div className="mx-auto max-w-6xl">
-        <div className="max-w-2xl">
-          <p className="text-xs uppercase tracking-[0.3em] text-gray-500">
-            Checkout
-          </p>
+    <main className="relative min-h-screen overflow-hidden bg-[#F5F1EA] px-5 pb-24 pt-32 sm:px-8 lg:px-10">
+      {/* Ambient background */}
+      <div className="pointer-events-none absolute -left-48 top-40 h-[500px] w-[500px] rounded-full bg-[#C5A880]/8 blur-[120px]" />
+      <div className="pointer-events-none absolute -right-48 top-[45%] h-[500px] w-[500px] rounded-full bg-[#8B7355]/8 blur-[120px]" />
 
-          <h1 className="mt-4 font-serif text-5xl text-gray-900 sm:text-6xl">
-            Review your stay.
+      <div className="relative mx-auto max-w-7xl">
+        {/* Page heading */}
+        <header className="max-w-3xl">
+          <div className="flex items-center gap-4">
+            <span className="h-px w-12 bg-[#C5A880]" />
+
+            <span className="text-[10px] font-medium uppercase tracking-[0.4em] text-[#8B7355]">
+              Reservation
+            </span>
+
+            <span className="text-[10px] tracking-[0.2em] text-[#AAA39A]">
+              03 / 03
+            </span>
+          </div>
+
+          <h1 className="mt-6 font-serif text-5xl leading-[0.95] tracking-tight text-[#111111] sm:text-6xl lg:text-7xl">
+            Complete your stay.
           </h1>
 
-          <p className="mt-6 text-sm leading-7 text-gray-500">
-            Review your reservation details before confirming your stay.
+          <p className="mt-7 max-w-xl text-sm leading-7 text-[#77716A]">
+            One final review before your reservation is confirmed.
+            Please make sure all details are correct.
           </p>
-        </div>
+        </header>
 
-        <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_420px]">
+        {/* Content */}
+        <div className="mt-14 grid gap-10 lg:grid-cols-[minmax(0,1fr)_390px] xl:mt-16 xl:gap-16">
+          {/* LEFT */}
           <section>
-            <img
-              src={hotel.image}
-              alt={hotel.name}
-              className="aspect-4/3 w-full object-cover"
-            />
+            {/* Hotel image */}
+            <div className="group relative overflow-hidden bg-[#111111]">
+              <img
+                src={hotel.image}
+                alt={hotel.name}
+                className="aspect-[16/10] w-full object-cover transition duration-1000 ease-out group-hover:scale-[1.035]"
+              />
 
-            <div className="mt-8">
-              <p className="text-xs uppercase tracking-[0.2em] text-gray-500">
-                {hotel.city}, {hotel.country}
-              </p>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent" />
 
-              <h2 className="mt-3 font-serif text-4xl text-gray-900">
-                {hotel.name}
-              </h2>
+              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                <p className="text-[10px] uppercase tracking-[0.3em] text-white/70">
+                  {hotel.city}, {hotel.country}
+                </p>
 
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-gray-500">
-                {hotel.description}
-              </p>
+                <h2 className="mt-2 font-serif text-3xl text-white sm:text-4xl">
+                  {hotel.name}
+                </h2>
+              </div>
+
+              
+            </div>
+
+            {/* Hotel information */}
+            <div className="mt-9 grid gap-8 border-b border-[#D8D0C4] pb-10 sm:grid-cols-[1fr_auto]">
+              <div>
+                <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#8B7355]">
+                  About the stay
+                </p>
+
+                <p className="mt-5 max-w-2xl text-sm leading-7 text-[#77716A]">
+                  {hotel.description}
+                </p>
+              </div>
+
+              <div className="flex gap-8 sm:border-l sm:border-[#D8D0C4] sm:pl-8">
+                <div>
+                  <p className="text-[9px] uppercase tracking-[0.25em] text-[#AAA39A]">
+                    From
+                  </p>
+
+                  <p className="mt-2 font-serif text-2xl text-[#111111]">
+                    ${hotel.price}
+                  </p>
+
+                  <p className="mt-1 text-[10px] text-[#99928A]">
+                    per night
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Guest information */}
+            <div className="mt-10">
+              <div className="flex items-center gap-4">
+                <span className="text-[10px] text-[#C5A880]">
+                  01
+                </span>
+
+                <span className="h-px w-8 bg-[#C5A880]" />
+
+                <p className="text-[10px] font-medium uppercase tracking-[0.3em] text-[#8B7355]">
+                  Guest information
+                </p>
+              </div>
+
+              <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                <div className="border border-[#D8D0C4] bg-white/35 px-5 py-4">
+                  <p className="text-[9px] uppercase tracking-[0.25em] text-[#AAA39A]">
+                    Full name
+                  </p>
+
+                  <p className="mt-2 text-sm text-[#111111]">
+                    {user?.firstName} {user?.lastName}
+                  </p>
+                </div>
+
+                <div className="border border-[#D8D0C4] bg-white/35 px-5 py-4">
+                  <p className="text-[9px] uppercase tracking-[0.25em] text-[#AAA39A]">
+                    Email
+                  </p>
+
+                  <p className="mt-2 truncate text-sm text-[#111111]">
+                    {user?.email}
+                  </p>
+                </div>
+              </div>
             </div>
           </section>
 
-          <aside className="h-fit border border-gray-200 p-6 sm:p-8">
-            <p className="text-xs uppercase tracking-[0.2em] text-gray-500">
-              Reservation details
-            </p>
+          {/* RIGHT — SUMMARY */}
+          <aside className="h-fit lg:sticky lg:top-28">
+            <div className="relative overflow-hidden border border-[#C5A880]/60 bg-[#111111] text-white shadow-[0_25px_70px_rgba(20,15,10,0.14)]">
+              {/* Card accent */}
+              <div className="absolute right-0 top-0 h-32 w-32 translate-x-1/2 -translate-y-1/2 rounded-full border border-[#C5A880]/20" />
+              <div className="absolute right-8 top-8 h-16 w-16 rounded-full border border-[#C5A880]/10" />
 
-            <div className="mt-8 space-y-5">
-              <div className="flex justify-between border-b border-gray-200 pb-4 text-sm">
-                <span className="text-gray-500">
-                  Guest
-                </span>
+              <div className="relative p-6 sm:p-8">
+                <div className="flex items-start justify-between border-b border-white/10 pb-6">
+                  <div>
+                    <p className="text-[9px] uppercase tracking-[0.35em] text-[#C5A880]">
+                      Reservation summary
+                    </p>
 
-                <span className="text-right text-gray-900">
-                  {user?.firstName} {user?.lastName}
-                </span>
-              </div>
+                    <h3 className="mt-3 font-serif text-2xl">
+                      Your stay
+                    </h3>
+                  </div>
 
-              <div className="flex justify-between border-b border-gray-200 pb-4 text-sm">
-                <span className="text-gray-500">
-                  Check in
-                </span>
+                  <span className="font-serif text-2xl text-[#C5A880]">
+                    ✦
+                  </span>
+                </div>
 
-                <span className="text-gray-900">
-                  {checkIn}
-                </span>
-              </div>
+                {/* Dates */}
+                <div className="mt-7 grid grid-cols-2 border border-white/10">
+                  <div className="border-r border-white/10 p-4">
+                    <p className="text-[9px] uppercase tracking-[0.25em] text-white/40">
+                      Check in
+                    </p>
 
-              <div className="flex justify-between border-b border-gray-200 pb-4 text-sm">
-                <span className="text-gray-500">
-                  Check out
-                </span>
+                    <p className="mt-3 text-sm text-white">
+                      {checkIn}
+                    </p>
+                  </div>
 
-                <span className="text-gray-900">
-                  {checkOut}
-                </span>
-              </div>
+                  <div className="p-4">
+                    <p className="text-[9px] uppercase tracking-[0.25em] text-white/40">
+                      Check out
+                    </p>
 
-              <div className="flex justify-between border-b border-gray-200 pb-4 text-sm">
-                <span className="text-gray-500">
-                  Guests
-                </span>
+                    <p className="mt-3 text-sm text-white">
+                      {checkOut}
+                    </p>
+                  </div>
+                </div>
 
-                <span className="text-gray-900">
-                  {guests}
-                </span>
-              </div>
+                {/* Details */}
+                <div className="mt-7 space-y-0">
+                  <div className="flex items-center justify-between border-b border-white/10 py-4">
+                    <span className="text-xs text-white/45">
+                      Guest
+                    </span>
 
-              <div className="flex justify-between border-b border-gray-200 pb-4 text-sm">
-                <span className="text-gray-500">
-                  Nights
-                </span>
+                    <span className="text-right text-xs text-white">
+                      {user?.firstName} {user?.lastName}
+                    </span>
+                  </div>
 
-                <span className="text-gray-900">
-                  {nights}
-                </span>
-              </div>
+                  <div className="flex items-center justify-between border-b border-white/10 py-4">
+                    <span className="text-xs text-white/45">
+                      Guests
+                    </span>
 
-              <div className="flex justify-between text-sm">
-                <span className="text-gray-500">
-                  Price / night
-                </span>
+                    <span className="text-xs text-white">
+                      {guests}
+                    </span>
+                  </div>
 
-                <span className="text-gray-900">
-                  ${hotel.price}
-                </span>
+                  <div className="flex items-center justify-between border-b border-white/10 py-4">
+                    <span className="text-xs text-white/45">
+                      Duration
+                    </span>
+
+                    <span className="text-xs text-white">
+                      {nights} {nights === 1 ? 'night' : 'nights'}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between py-4">
+                    <span className="text-xs text-white/45">
+                      Rate
+                    </span>
+
+                    <span className="text-xs text-white">
+                      ${hotel.price} / night
+                    </span>
+                  </div>
+                </div>
+
+                {/* Total */}
+                <div className="mt-4 border-t border-[#C5A880]/40 pt-6">
+                  <div className="flex items-end justify-between">
+                    <div>
+                      <p className="text-[9px] uppercase tracking-[0.3em] text-[#C5A880]">
+                        Total stay
+                      </p>
+
+                      <p className="mt-2 text-[10px] text-white/35">
+                        {nights} nights · {guests} guests
+                      </p>
+                    </div>
+
+                    <p className="font-serif text-3xl text-white">
+                      ${totalPrice}
+                    </p>
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <button
+                  type="button"
+                  onClick={handleConfirm}
+                  disabled={nights <= 0 || !user}
+                  className="group relative mt-8 w-full overflow-hidden bg-[#C5A880] px-6 py-5 text-[10px] font-medium uppercase tracking-[0.3em] text-[#111111] transition duration-500 hover:bg-[#D5BC99] disabled:cursor-not-allowed disabled:opacity-40"
+                >
+                  <span className="absolute inset-y-0 left-0 w-0 bg-white/20 transition-all duration-500 group-hover:w-full" />
+
+                  <span className="relative z-10">
+                    Confirm reservation
+                  </span>
+                </button>
+
+                <p className="mt-5 text-center text-[9px] leading-5 text-white/30">
+                  Your reservation will be securely saved
+                  to your Stayora account.
+                </p>
               </div>
             </div>
 
-            <div className="mt-8 border-t border-gray-200 pt-6">
-              <div className="flex justify-between text-lg font-medium text-gray-900">
-                <span>Total</span>
+            {/* Secure note */}
+            <div className="mt-4 flex items-center gap-3 border border-[#D8D0C4] bg-white/30 px-5 py-4">
+              <span className="text-[#8B7355]">◈</span>
 
-                <span>${totalPrice}</span>
-              </div>
+              <p className="text-[10px] leading-5 text-[#77716A]">
+                Reservation details are linked to your account
+                and available in My Bookings.
+              </p>
             </div>
-
-            <button
-              type="button"
-              onClick={handleConfirm}
-              disabled={nights <= 0 || !user}
-              className="mt-8 w-full bg-gray-900 px-6 py-4 text-xs uppercase tracking-[0.2em] text-white transition hover:bg-gray-700 disabled:cursor-not-allowed disabled:opacity-40"
-            >
-              Confirm booking
-            </button>
           </aside>
         </div>
       </div>
     </main>
   )
 }
-export default Checkout
 
+export default Checkout
 
