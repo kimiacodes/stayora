@@ -4,7 +4,7 @@ import ScrollReveal from '../ScrollReveal/ScrollReveal'
 function Footer() {
   return (
     <footer className="bg-[#0B0B0B] text-[#F5F1EA]">
-      <div className="mx-auto max-w-7xl px-8 py-20 lg:px-10 lg:py-24">
+      <div className="mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-10 lg:py-24">
 
         {/* Top */}
         <ScrollReveal>
@@ -53,42 +53,21 @@ function Footer() {
                 <div className="mt-7 flex flex-col gap-4">
                   <Link
                     to="/hotels"
-                    className="
-                      w-fit
-                      text-sm
-                      text-[#B8AEA2]
-                      transition-colors
-                      duration-300
-                      hover:text-[#C5A880]
-                    "
+                    className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]"
                   >
                     Stays
                   </Link>
 
                   <Link
                     to="/destinations"
-                    className="
-                      w-fit
-                      text-sm
-                      text-[#B8AEA2]
-                      transition-colors
-                      duration-300
-                      hover:text-[#C5A880]
-                    "
+                    className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]"
                   >
                     Destinations
                   </Link>
 
                   <Link
                     to="/experiences"
-                    className="
-                      w-fit
-                      text-sm
-                      text-[#B8AEA2]
-                      transition-colors
-                      duration-300
-                      hover:text-[#C5A880]
-                    "
+                    className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]"
                   >
                     Experiences
                   </Link>
@@ -104,42 +83,21 @@ function Footer() {
                 <div className="mt-7 flex flex-col gap-4">
                   <Link
                     to="/about"
-                    className="
-                      w-fit
-                      text-sm
-                      text-[#B8AEA2]
-                      transition-colors
-                      duration-300
-                      hover:text-[#C5A880]
-                    "
+                    className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]"
                   >
                     About
                   </Link>
 
                   <Link
                     to="/contact"
-                    className="
-                      w-fit
-                      text-sm
-                      text-[#B8AEA2]
-                      transition-colors
-                      duration-300
-                      hover:text-[#C5A880]
-                    "
+                    className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]"
                   >
                     Contact
                   </Link>
 
                   <Link
                     to="/login"
-                    className="
-                      w-fit
-                      text-sm
-                      text-[#B8AEA2]
-                      transition-colors
-                      duration-300
-                      hover:text-[#C5A880]
-                    "
+                    className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]"
                   >
                     Sign in
                   </Link>
@@ -155,15 +113,15 @@ function Footer() {
           <div
             className="
               flex
-              flex-col
-              gap-6
+              items-center
+              justify-between
+              gap-3
               pt-7
-              sm:flex-row
-              sm:items-center
-              sm:justify-between
+              sm:gap-6
             "
           >
-            <p className="text-[10px] uppercase tracking-[0.15em] text-[#756C62]">
+            {/* Copyright */}
+            <p className="shrink-0 text-[8px] uppercase tracking-[0.12em] text-[#756C62] sm:text-[10px] sm:tracking-[0.15em]">
               © 2026 Stayora. All rights reserved.
             </p>
 
@@ -171,19 +129,22 @@ function Footer() {
             <div
               className="
                 flex
-                w-fit
+                shrink-0
                 items-center
-                gap-2
-                rounded-[15px]
+                gap-1
+                rounded-[13px]
                 border
                 border-[#C5A880]/20
                 bg-white/2
-                p-2
+                p-1.5
                 shadow-[inset_0_0_20px_rgba(255,255,255,0.04),0_5px_15px_rgba(0,0,0,0.15)]
                 backdrop-blur-[15px]
                 transition-all
                 duration-500
                 hover:bg-white/5
+                sm:gap-2
+                sm:rounded-[15px]
+                sm:p-2
               "
             >
 
@@ -195,8 +156,8 @@ function Footer() {
                   group
                   relative
                   flex
-                  h-10
-                  w-10
+                  h-8
+                  w-8
                   items-center
                   justify-center
                   rounded-full
@@ -206,6 +167,8 @@ function Footer() {
                   duration-300
                   hover:-translate-y-1
                   hover:bg-[#C5A880]/10
+                  sm:h-10
+                  sm:w-10
                 "
               >
                 <svg
@@ -214,7 +177,7 @@ function Footer() {
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="1.7"
-                  className="h-4 w-4 transition-transform duration-300 group-hover:scale-110"
+                  className="h-3.5 w-3.5 transition-transform duration-300 group-hover:scale-110 sm:h-4 sm:w-4"
                 >
                   <rect
                     x="3"
@@ -275,8 +238,8 @@ function Footer() {
                   group
                   relative
                   flex
-                  h-10
-                  w-10
+                  h-8
+                  w-8
                   items-center
                   justify-center
                   rounded-full
@@ -286,13 +249,15 @@ function Footer() {
                   duration-300
                   hover:-translate-y-1
                   hover:bg-[#C5A880]/10
+                  sm:h-10
+                  sm:w-10
                 "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="h-4 w-4 transition-transform duration-300 group-hover:scale-110"
+                  className="h-3.5 w-3.5 transition-transform duration-300 group-hover:scale-110 sm:h-4 sm:w-4"
                 >
                   <path d="M14 8h3V4h-3c-3.3 0-5 1.9-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1Z" />
                 </svg>
@@ -333,8 +298,8 @@ function Footer() {
                   group
                   relative
                   flex
-                  h-10
-                  w-10
+                  h-8
+                  w-8
                   items-center
                   justify-center
                   rounded-full
@@ -344,13 +309,15 @@ function Footer() {
                   duration-300
                   hover:-translate-y-1
                   hover:bg-[#C5A880]/10
+                  sm:h-10
+                  sm:w-10
                 "
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="h-4 w-4 transition-transform duration-300 group-hover:scale-110"
+                  className="h-3.5 w-3.5 transition-transform duration-300 group-hover:scale-110 sm:h-4 sm:w-4"
                 >
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817-5.963 6.817H1.684l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77Z" />
                 </svg>
