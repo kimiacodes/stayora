@@ -134,103 +134,138 @@ function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      {/* Mobile Menu */}
-<div
-  className={`overflow-hidden border-t border-white/10 bg-[#0B0B0B]/98 backdrop-blur-xl transition-all duration-500 md:hidden ${
-    isMenuOpen
-      ? 'max-h-150 opacity-100'
-      : 'max-h-0 opacity-0'
-  }`}
->
-  <div className="px-5 py-6 sm:px-6 sm:py-7">
-
-    {/* Account */}
-    {user && (
-      <Link
-        to="/account"
-        onClick={closeMenu}
-        className="group flex items-center gap-3 border border-white/10 bg-white/[0.03] p-4 sm:p-5"
+      <div
+        className={`overflow-hidden border-t border-white/10 bg-[#0B0B0B]/98 backdrop-blur-xl transition-all duration-500 md:hidden ${
+          isMenuOpen
+            ? 'max-h-150 opacity-100'
+            : 'max-h-0 opacity-0'
+        }`}
       >
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#C5A880]/50 bg-[#C5A880]/10 font-serif text-sm text-[#C5A880] transition duration-300 group-hover:bg-[#C5A880] group-hover:text-[#0B0B0B]">
-          {user.firstName?.charAt(0).toUpperCase()}
-        </span>
+        <div className="px-5 py-6 sm:px-6 sm:py-7">
 
-        <span className="flex flex-col">
-          <span className="text-sm text-white transition group-hover:text-[#C5A880] sm:text-base">
-            {user.firstName} {user.lastName}
-          </span>
+          {/* Account */}
+          {user && (
+            <Link
+              to="/account"
+              onClick={closeMenu}
+              className="group flex items-center gap-3 border border-white/10 bg-white/[0.03] p-4 sm:p-5"
+            >
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#C5A880]/50 bg-[#C5A880]/10 font-serif text-sm text-[#C5A880] transition duration-300 group-hover:bg-[#C5A880] group-hover:text-[#0B0B0B]">
+                {user.firstName?.charAt(0).toUpperCase()}
+              </span>
 
-          <span className="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/40">
-            Your account
-          </span>
-        </span>
-      </Link>
-    )}
+              <span className="flex flex-col">
+                <span className="text-sm text-white transition group-hover:text-[#C5A880] sm:text-base">
+                  {user.firstName} {user.lastName}
+                </span>
 
-    {/* Navigation */}
-    <div className="mt-5 flex flex-col sm:mt-6">
-      <Link
-        to="/hotels"
-        onClick={closeMenu}
-        className="border-b border-white/10 py-3.5 text-xs uppercase tracking-[0.15em] text-white/90 transition hover:text-[#C5A880] sm:py-4 sm:text-sm"
-      >
-        Stays
-      </Link>
+                <span className="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/40">
+                  Your account
+                </span>
+              </span>
+            </Link>
+          )}
 
-      <Link
-        to="/destinations"
-        onClick={closeMenu}
-        className="border-b border-white/10 py-3.5 text-xs uppercase tracking-[0.15em] text-white/90 transition hover:text-[#C5A880] sm:py-4 sm:text-sm"
-      >
-        Destinations
-      </Link>
+          {/* Navigation */}
+          <div className="mt-5 flex flex-col sm:mt-6">
+            <Link
+              to="/hotels"
+              onClick={closeMenu}
+              className="border-b border-white/10 py-3.5 text-xs uppercase tracking-[0.15em] text-white/90 transition hover:text-[#C5A880] sm:py-4 sm:text-sm"
+            >
+              Stays
+            </Link>
 
-      <Link
-        to="/experiences"
-        onClick={closeMenu}
-        className="border-b border-white/10 py-3.5 text-xs uppercase tracking-[0.15em] text-white/90 transition hover:text-[#C5A880] sm:py-4 sm:text-sm"
-      >
-        Experiences
-      </Link>
-    </div>
+            <Link
+              to="/destinations"
+              onClick={closeMenu}
+              className="border-b border-white/10 py-3.5 text-xs uppercase tracking-[0.15em] text-white/90 transition hover:text-[#C5A880] sm:py-4 sm:text-sm"
+            >
+              Destinations
+            </Link>
 
-    {/* Auth */}
-    <div className="mt-6">
-      {user ? (
-        <button
-          type="button"
-          onClick={handleLogout}
-          className="group relative w-full cursor-pointer overflow-hidden rounded-lg bg-[#0B0B0B] px-4 py-3 text-center text-[10px] uppercase tracking-[0.18em] text-white outline-offset-4 transition-transform duration-300 ease-in-out focus:outline-2 focus:outline-white focus:outline-offset-4"
-        >
-          <span className="relative z-20">
-            Logout
-          </span>
+            <Link
+              to="/experiences"
+              onClick={closeMenu}
+              className="border-b border-white/10 py-3.5 text-xs uppercase tracking-[0.15em] text-white/90 transition hover:text-[#C5A880] sm:py-4 sm:text-sm"
+            >
+              Experiences
+            </Link>
+          </div>
 
-          {/* Shine */}
-          <span className="absolute left-[-75%] top-0 z-10 h-full w-[50%] rotate-12 bg-white/20 blur-lg transition-all duration-1000 ease-in-out group-hover:left-[125%]" />
+          {/* Auth */}
+          <div className="mt-6">
+            {user ? (
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="group relative w-full cursor-pointer overflow-hidden rounded-lg bg-[#0B0B0B] px-4 py-3 text-center text-[10px] uppercase tracking-[0.18em] text-white outline-offset-4 transition-transform duration-300 ease-in-out focus:outline-2 focus:outline-white focus:outline-offset-4"
+              >
+                <span className="relative z-20">
+                  Logout
+                </span>
 
-          {/* Top Left */}
-          <span className="absolute left-0 top-0 z-10 block h-[20%] w-1/2 rounded-tl-lg border-l-2 border-t-2 border-[#C5A880]" />
+                <span className="absolute left-[-75%] top-0 z-10 h-full w-[50%] rotate-12 bg-white/20 blur-lg transition-all duration-1000 ease-in-out group-hover:left-[125%]" />
 
-          {/* Top Right */}
-          <span className="absolute right-0 top-0 z-10 block h-[60%] w-1/2 rounded-tr-lg border-r-2 border-t-2 border-[#C5A880] transition-all duration-300 group-hover:h-[90%]" />
+                <span className="absolute left-0 top-0 z-10 block h-[20%] w-1/2 rounded-tl-lg border-l-2 border-t-2 border-[#C5A880]" />
 
-          {/* Bottom Left */}
-          <span className="absolute bottom-0 left-0 z-10 block h-[60%] w-1/2 rounded-bl-lg border-b-2 border-l-2 border-[#C5A880] transition-all duration-300 group-hover:h-[90%]" />
+                <span className="absolute right-0 top-0 z-10 block h-[60%] w-1/2 rounded-tr-lg border-r-2 border-t-2 border-[#C5A880] transition-all duration-300 group-hover:h-[90%]" />
 
-          {/* Bottom Right */}
-          <span className="absolute bottom-0 right-0 z-10 block h-[20%] w-1/2 rounded-br-lg border-b-2 border-r-2 border-[#C5A880]" />
-        </button>
-      ) : (
-        <div className="flex gap-3">
-          {/* Login / Sign in همان کد قبلی */}
+                <span className="absolute bottom-0 left-0 z-10 block h-[60%] w-1/2 rounded-bl-lg border-b-2 border-l-2 border-[#C5A880] transition-all duration-300 group-hover:h-[90%]" />
+
+                <span className="absolute bottom-0 right-0 z-10 block h-[20%] w-1/2 rounded-br-lg border-b-2 border-r-2 border-[#C5A880]" />
+              </button>
+            ) : (
+              <div className="flex gap-3">
+
+                {/* Login */}
+                <Link
+                  to="/login"
+                  onClick={closeMenu}
+                  className="group relative flex flex-1 cursor-pointer items-center justify-center overflow-hidden bg-[#0B0B0B] px-4 py-3 text-center text-[10px] uppercase tracking-[0.18em] text-white outline-offset-4 transition-transform duration-300 ease-in-out focus:outline-2 focus:outline-white focus:outline-offset-4"
+                >
+                  <span className="relative z-20">
+                    Login
+                  </span>
+
+                  <span className="absolute left-[-75%] top-0 z-10 h-full w-[50%] rotate-12 bg-white/20 blur-lg transition-all duration-1000 ease-in-out group-hover:left-[125%]" />
+
+                  <span className="absolute left-0 top-0 z-10 block h-[20%] w-1/2 rounded-tl-lg border-l-2 border-t-2 border-[#C5A880]" />
+
+                  <span className="absolute right-0 top-0 z-10 block h-[60%] w-1/2 rounded-tr-lg border-r-2 border-t-2 border-[#C5A880] transition-all duration-300 group-hover:h-[90%]" />
+
+                  <span className="absolute bottom-0 left-0 z-10 block h-[60%] w-1/2 rounded-bl-lg border-b-2 border-l-2 border-[#C5A880] transition-all duration-300 group-hover:h-[90%]" />
+
+                  <span className="absolute bottom-0 right-0 z-10 block h-[20%] w-1/2 rounded-br-lg border-b-2 border-r-2 border-[#C5A880]" />
+                </Link>
+
+                {/* Sign in */}
+                <Link
+                  to="/register"
+                  onClick={closeMenu}
+                  className="group relative flex flex-1 cursor-pointer items-center justify-center overflow-hidden bg-[#0B0B0B] px-4 py-3 text-center text-[10px] uppercase tracking-[0.18em] text-white outline-offset-4 transition-transform duration-300 ease-in-out focus:outline-2 focus:outline-white focus:outline-offset-4"
+                >
+                  <span className="relative z-20">
+                    Sign in
+                  </span>
+
+                  <span className="absolute left-[-75%] top-0 z-10 h-full w-[50%] rotate-12 bg-white/20 blur-lg transition-all duration-1000 ease-in-out group-hover:left-[125%]" />
+
+                  <span className="absolute left-0 top-0 z-10 block h-[20%] w-1/2 rounded-tl-lg border-l-2 border-t-2 border-[#C5A880]" />
+
+                  <span className="absolute right-0 top-0 z-10 block h-[60%] w-1/2 rounded-tr-lg border-r-2 border-t-2 border-[#C5A880] transition-all duration-300 group-hover:h-[90%]" />
+
+                  <span className="absolute bottom-0 left-0 z-10 block h-[60%] w-1/2 rounded-bl-lg border-b-2 border-l-2 border-[#C5A880] transition-all duration-300 group-hover:h-[90%]" />
+
+                  <span className="absolute bottom-0 right-0 z-10 block h-[20%] w-1/2 rounded-br-lg border-b-2 border-r-2 border-[#C5A880]" />
+                </Link>
+
+              </div>
+            )}
+          </div>
+
         </div>
-      )}
-    </div>
-
-  </div>
-</div>
-      
+      </div>
     </header>
   )
 }
