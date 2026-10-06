@@ -241,39 +241,44 @@ function HotelDetails() {
   return (
     <main className="min-h-screen bg-[#F5F1EA]">
 
-      {/* =========================
-          Gallery
-      ========================== */}
+     {/* =========================
+    Gallery
+========================== */}
 
-      <section className="px-5 pt-20 md:px-10 lg:pt-25">
-        <div className="mx-auto max-w-6xl">
+<section className="px-5 pt-28 md:px-10 lg:pt-36">
 
-          <ScrollReveal direction="up">
+  <div className="mx-auto max-w-7xl">
 
-            <div className="relative">
+    <ScrollReveal direction="up">
 
-              <CoverflowCarousel
-                items={hotel.gallery.map((image, index) => ({
-                  id: String(index),
-                  image,
-                  alt: `${hotel.name} ${index + 1}`,
-                }))}
-                loop
-              />
+      <div className="flex flex-col gap-8">
 
-              <div className="pointer-events-none absolute left-6 top-6 z-40">
-                <p className="text-[10px] uppercase tracking-[0.3em] text-white/80 sm:text-xs">
-                  {hotel.city}, {hotel.country}
-                </p>
-              </div>
+        {/* Location */}
 
-            </div>
-
-          </ScrollReveal>
-
+        <div className="flex items-center">
+          <p className="text-base uppercase tracking-[0.3em] text-[#6F665C] sm:text-lg">
+            {hotel.city}, {hotel.country}
+          </p>
         </div>
-      </section>
 
+        {/* Gallery */}
+
+        <CoverflowCarousel
+          items={hotel.gallery.map((image, index) => ({
+            id: String(index),
+            image,
+            alt: `${hotel.name} ${index + 1}`,
+          }))}
+          loop
+        />
+
+      </div>
+
+    </ScrollReveal>
+
+  </div>
+
+</section>
 
       {/* =========================
           Hotel Information + Booking
@@ -640,318 +645,335 @@ function HotelDetails() {
 
 
       {/* =========================
+    Guest Reviews
+========================== */}
+
+<section className="border-t border-[#D8D0C4] bg-[#F5F1EA] px-6 py-20 lg:px-10 lg:py-28">
+
+  <div className="mx-auto max-w-7xl">
+
+    {/* Header */}
+
+    <ScrollReveal direction="up">
+
+      <div>
+
+        <p className="text-xs uppercase tracking-[0.3em] text-[#8B7355]">
           Guest Reviews
-      ========================== */}
+        </p>
 
-      <section className="border-t border-[#D8D0C4] bg-[#F5F1EA] px-6 py-20 lg:px-10 lg:py-28">
+        <h2 className="mt-4 font-serif text-4xl leading-tight text-[#0B0B0B] sm:text-5xl">
+          What our guests say.
+        </h2>
 
-        <ScrollReveal direction="up">
+        <p className="mt-5 max-w-xl text-sm leading-7 text-gray-500">
+          Discover what previous guests experienced during their stay
+          at {hotel.name}.
+        </p>
 
-          <div className="mx-auto max-w-7xl">
+      </div>
 
-            {/* Header */}
-
-            <div>
-
-              <p className="text-xs uppercase tracking-[0.3em] text-[#8B7355]">
-                Guest Reviews
-              </p>
-
-              <h2 className="mt-4 font-serif text-4xl leading-tight text-[#0B0B0B] sm:text-5xl">
-                What our guests say.
-              </h2>
-
-              <p className="mt-5 max-w-xl text-sm leading-7 text-gray-500">
-                Discover what previous guests experienced during their stay
-                at {hotel.name}.
-              </p>
-
-            </div>
+    </ScrollReveal>
 
 
-            {/* Rating Overview */}
+    {/* Rating Overview */}
 
-            <div className="mt-14 grid border-y border-[#D8D0C4] md:grid-cols-[220px_1fr]">
+    <ScrollReveal direction="up" delay={100}>
 
-              <div className="flex flex-col items-center justify-center border-b border-[#D8D0C4] px-6 py-10 md:border-b-0 md:border-r">
+      <div className="mt-14 grid border-y border-[#D8D0C4] md:grid-cols-[220px_1fr]">
 
-                <span className="font-serif text-6xl text-[#0B0B0B]">
-                  {hotel.rating}
-                </span>
+        <div className="flex flex-col items-center justify-center border-b border-[#D8D0C4] px-6 py-10 md:border-b-0 md:border-r">
 
-                <div className="mt-3 flex gap-1 text-lg text-[#C5A880]">
-                  ★★★★★
+          <span className="font-serif text-6xl text-[#0B0B0B]">
+            {hotel.rating}
+          </span>
+
+          <div className="mt-3 flex gap-1 text-lg text-[#C5A880]">
+            ★★★★★
+          </div>
+
+          <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-gray-400">
+            {totalReviews} guest reviews
+          </p>
+
+        </div>
+
+
+        <div className="px-2 py-8 sm:px-8 lg:px-12">
+
+          <div className="max-w-xl space-y-4">
+
+            {ratingCounts.map((item) => {
+
+              const percentage =
+                totalReviews > 0
+                  ? (item.count / totalReviews) * 100
+                  : 0
+
+              return (
+
+                <div
+                  key={item.rating}
+                  className="flex items-center gap-4"
+                >
+
+                  <span className="w-7 text-xs text-gray-500">
+                    {item.rating}★
+                  </span>
+
+                  <div className="h-1.5 flex-1 overflow-hidden bg-[#D8D0C4]">
+
+                    <div
+                      className="h-full bg-[#C5A880] transition-all duration-700"
+                      style={{
+                        width: `${percentage}%`,
+                      }}
+                    />
+
+                  </div>
+
+                  <span className="w-5 text-right text-xs text-gray-400">
+                    {item.count}
+                  </span>
+
                 </div>
 
-                <p className="mt-3 text-[10px] uppercase tracking-[0.2em] text-gray-400">
-                  {totalReviews} guest reviews
-                </p>
+              )
+            })}
 
-              </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </ScrollReveal>
 
 
-              <div className="px-2 py-8 sm:px-8 lg:px-12">
+    {/* Add Review */}
 
-                <div className="max-w-xl space-y-4">
+    <ScrollReveal direction="up" delay={150}>
 
-                  {ratingCounts.map((item) => {
+      <div className="mt-14 border border-[#D8D0C4] bg-white p-6 sm:p-8">
 
-                    const percentage =
-                      totalReviews > 0
-                        ? (item.count / totalReviews) * 100
-                        : 0
+        <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+
+          <div>
+
+            <p className="text-xs uppercase tracking-[0.2em] text-[#8B7355]">
+              Share your experience
+            </p>
+
+            <p className="mt-2 text-xs text-gray-400">
+              {currentUserId
+                ? `Writing as ${currentUserName}`
+                : 'Sign in to share your experience.'}
+            </p>
+
+          </div>
+
+          {!currentUserId && (
+
+            <Link
+              to="/login"
+              className="text-xs uppercase tracking-[0.15em] text-[#8B7355] underline underline-offset-4"
+            >
+              Sign in
+            </Link>
+
+          )}
+
+        </div>
+
+
+        {currentUserId && (
+
+          <>
+
+            {/* Rating */}
+
+            <div className="mt-8">
+
+              <p className="text-[10px] uppercase tracking-[0.2em] text-[#8B7355]">
+                Your rating
+              </p>
+
+              <div className="mt-3 flex gap-1">
+
+                {Array.from({ length: 5 }).map(
+                  (_, index) => {
+
+                    const rating = index + 1
 
                     return (
 
-                      <div
-                        key={item.rating}
-                        className="flex items-center gap-4"
+                      <button
+                        key={rating}
+                        type="button"
+                        onClick={() =>
+                          setReviewRating(rating)
+                        }
+                        aria-label={`Rate ${rating} out of 5`}
+                        className="text-2xl transition-transform duration-200 hover:scale-110"
                       >
 
-                        <span className="w-7 text-xs text-gray-500">
-                          {item.rating}★
+                        <span
+                          className={
+                            rating <= reviewRating
+                              ? 'text-[#C5A880]'
+                              : 'text-[#D8D0C4]'
+                          }
+                        >
+                          ★
                         </span>
 
-                        <div className="h-1.5 flex-1 overflow-hidden bg-[#D8D0C4]">
-
-                          <div
-                            className="h-full bg-[#C5A880] transition-all duration-700"
-                            style={{
-                              width: `${percentage}%`,
-                            }}
-                          />
-
-                        </div>
-
-                        <span className="w-5 text-right text-xs text-gray-400">
-                          {item.count}
-                        </span>
-
-                      </div>
+                      </button>
 
                     )
-                  })}
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            {/* Add Review */}
-
-            <div className="mt-14 border border-[#D8D0C4] bg-white p-6 sm:p-8">
-
-              <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
-
-                <div>
-
-                  <p className="text-xs uppercase tracking-[0.2em] text-[#8B7355]">
-                    Share your experience
-                  </p>
-
-                  <p className="mt-2 text-xs text-gray-400">
-                    {currentUserId
-                      ? `Writing as ${currentUserName}`
-                      : 'Sign in to share your experience.'}
-                  </p>
-
-                </div>
-
-                {!currentUserId && (
-
-                  <Link
-                    to="/login"
-                    className="text-xs uppercase tracking-[0.15em] text-[#8B7355] underline underline-offset-4"
-                  >
-                    Sign in
-                  </Link>
-
+                  }
                 )}
 
               </div>
 
-
-              {currentUserId && (
-
-                <>
-
-                  {/* Rating */}
-
-                  <div className="mt-8">
-
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-[#8B7355]">
-                      Your rating
-                    </p>
-
-                    <div className="mt-3 flex gap-1">
-
-                      {Array.from({ length: 5 }).map(
-                        (_, index) => {
-
-                          const rating = index + 1
-
-                          return (
-
-                            <button
-                              key={rating}
-                              type="button"
-                              onClick={() =>
-                                setReviewRating(rating)
-                              }
-                              aria-label={`Rate ${rating} out of 5`}
-                              className="text-2xl transition-transform duration-200 hover:scale-110"
-                            >
-
-                              <span
-                                className={
-                                  rating <= reviewRating
-                                    ? 'text-[#C5A880]'
-                                    : 'text-[#D8D0C4]'
-                                }
-                              >
-                                ★
-                              </span>
-
-                            </button>
-
-                          )
-                        }
-                      )}
-
-                    </div>
-
-                  </div>
-
-
-                  {/* Text */}
-
-      <textarea
-  value={reviewText}
-  onChange={(e) => setReviewText(e.target.value)}
-  placeholder="Write your review..."
-  
-  className="mt-7 h-20 w-full resize-none border border-[#D8D0C4] bg-[#F5F1EA] p-4 text-sm leading-7 text-[#0B0B0B] outline-none transition placeholder:text-gray-400 focus:border-[#8B7355] sm:h-40"
-/>
-
-
-                  <div className="mt-5 flex justify-end">
-
-                    <button
-                      type="button"
-                      disabled={!reviewText.trim()}
-                      onClick={handleReviewSubmit}
-                      className="bg-[#0B0B0B] px-6 py-3 text-xs uppercase tracking-[0.15em] text-white transition hover:bg-[#8B7355] disabled:cursor-not-allowed disabled:bg-[#D8D0C4]"
-                    >
-                      Publish review
-                    </button>
-
-                  </div>
-
-                </>
-
-              )}
-
             </div>
 
 
-            {/* Reviews List */}
+            {/* Text */}
 
-            <div className="mt-14">
-
-              <div className="mb-8 flex items-center justify-between">
-
-                <p className="text-xs uppercase tracking-[0.2em] text-[#8B7355]">
-                  Recent experiences
-                </p>
-
-                <span className="text-xs text-gray-400">
-                  {totalReviews} reviews
-                </span>
-
-              </div>
+            <textarea
+              value={reviewText}
+              onChange={(e) => setReviewText(e.target.value)}
+              placeholder="Write your review..."
+              className="mt-7 h-20 w-full resize-none border border-[#D8D0C4] bg-[#F5F1EA] p-4 text-sm leading-7 text-[#0B0B0B] outline-none transition placeholder:text-gray-400 focus:border-[#8B7355] sm:h-40"
+            />
 
 
-              {/* Reviews */}
+            <div className="mt-5 flex justify-end">
 
-              <div className="border-t border-[#D8D0C4]">
-
-                {displayedReviews.map((review) => {
-
-                  const isOwner =
-                    currentUserId &&
-                    review.userId === currentUserId
-
-                  const isEditing =
-                    editingReviewId === review.id
-
-                  return (
-                    <ReviewItem
-                      key={review.id}
-                      review={review}
-                      isOwner={isOwner}
-                      isEditing={isEditing}
-                      onEdit={handleEditReview}
-                      onUpdate={handleUpdateReview}
-                      onDelete={handleDeleteReview}
-                      onCancel={() =>
-                        setEditingReviewId(null)
-                      }
-                    />
-                  )
-                })}
-
-              </div>
-
-
-              {/* Read More */}
-
-              {hasMoreReviews && (
-
-                <div className="mt-10 flex justify-center">
-
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setVisibleReviews(
-                        (current) => current + 5
-                      )
-                    }
-                    className="group inline-flex items-center gap-3 border border-[#8B7355] px-7 py-3 text-xs uppercase tracking-[0.18em] text-[#0B0B0B] transition duration-300 hover:bg-[#C5A880]"
-                  >
-
-                    Read more reviews
-
-                    <span className="transition-transform duration-300 group-hover:translate-y-0.5">
-                      ↓
-                    </span>
-
-                  </button>
-
-                </div>
-
-              )}
+              <button
+                type="button"
+                disabled={!reviewText.trim()}
+                onClick={handleReviewSubmit}
+                className="bg-[#0B0B0B] px-6 py-3 text-xs uppercase tracking-[0.15em] text-white transition hover:bg-[#8B7355] disabled:cursor-not-allowed disabled:bg-[#D8D0C4]"
+              >
+                Publish review
+              </button>
 
             </div>
 
+          </>
 
-            <div className="mt-10 flex items-center gap-4">
+        )}
 
-              <span className="h-px w-12 bg-[#C5A880]" />
+      </div>
 
-              <span className="text-[10px] uppercase tracking-[0.3em] text-gray-400">
-                Stayora Guest Experience
+    </ScrollReveal>
+
+
+    {/* Reviews List */}
+
+    <ScrollReveal direction="up" delay={200}>
+
+      <div className="mt-14">
+
+        <div className="mb-8 flex items-center justify-between">
+
+          <p className="text-xs uppercase tracking-[0.2em] text-[#8B7355]">
+            Recent experiences
+          </p>
+
+          <span className="text-xs text-gray-400">
+            {totalReviews} reviews
+          </span>
+
+        </div>
+
+
+        {/* Reviews */}
+
+        <div className="border-t border-[#D8D0C4]">
+
+          {displayedReviews.map((review) => {
+
+            const isOwner =
+              currentUserId &&
+              review.userId === currentUserId
+
+            const isEditing =
+              editingReviewId === review.id
+
+            return (
+
+              <ReviewItem
+                key={review.id}
+                review={review}
+                isOwner={isOwner}
+                isEditing={isEditing}
+                onEdit={handleEditReview}
+                onUpdate={handleUpdateReview}
+                onDelete={handleDeleteReview}
+                onCancel={() =>
+                  setEditingReviewId(null)
+                }
+              />
+
+            )
+
+          })}
+
+        </div>
+
+
+        {/* Read More */}
+
+        {hasMoreReviews && (
+
+          <div className="mt-10 flex justify-center">
+
+            <button
+              type="button"
+              onClick={() =>
+                setVisibleReviews(
+                  (current) => current + 5
+                )
+              }
+              className="group inline-flex items-center gap-3 border border-[#8B7355] px-7 py-3 text-xs uppercase tracking-[0.18em] text-[#0B0B0B] transition duration-300 hover:bg-[#C5A880]"
+            >
+
+              Read more reviews
+
+              <span className="transition-transform duration-300 group-hover:translate-y-0.5">
+                ↓
               </span>
 
-            </div>
+            </button>
 
           </div>
 
-        </ScrollReveal>
+        )}
 
-      </section>
+      </div>
 
+    </ScrollReveal>
+
+
+    <ScrollReveal direction="up" delay={250}>
+
+      <div className="mt-10 flex items-center gap-4">
+
+        <span className="h-px w-12 bg-[#C5A880]" />
+
+        <span className="text-[10px] uppercase tracking-[0.3em] text-gray-400">
+          Stayora Guest Experience
+        </span>
+
+      </div>
+
+    </ScrollReveal>
+
+  </div>
+
+</section>
     </main>
   )
 }
@@ -1048,14 +1070,13 @@ function ReviewItem({
         {/* Edit textarea */}
 
         <textarea
-          value={editComment}
-          onChange={(e) =>
-            setEditComment(e.target.value)
-          }
-          rows="5"
-          className="mt-5 w-full resize-none border border-[#D8D0C4] bg-white p-4 text-sm leading-7 text-[#0B0B0B] outline-none transition focus:border-[#8B7355]"
-        />
-
+  value={editComment}
+  onChange={(e) =>
+    setEditComment(e.target.value)
+  }
+  placeholder="Edit your review..."
+  className="mt-5 h-20 w-full resize-none border border-[#D8D0C4] bg-white p-4 text-sm leading-7 text-[#0B0B0B] outline-none transition placeholder:text-gray-400 focus:border-[#8B7355] sm:h-40"
+/>
 
         {/* Edit actions */}
 

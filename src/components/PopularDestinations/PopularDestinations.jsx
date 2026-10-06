@@ -1,54 +1,57 @@
-
 import { Link } from 'react-router-dom'
 import { destinations } from '../../data/destinations'
 import ScrollReveal from '../ScrollReveal/ScrollReveal'
 
 function PopularDestinations() {
   return (
-    <section className="overflow-hidden bg-[#F5F1EA] px-8 py-24 lg:px-10 lg:py-32">
-      <div className="mx-auto max-w-7xl">
-
+    <section className="overflow-hidden bg-[#F5F1EA] py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-10">
         {/* Header */}
-        <div className="mb-12 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-
-          <ScrollReveal>
+        <div className="mb-14 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
+          <ScrollReveal direction="up">
             <div>
-              <div className="mb-5 flex items-center gap-3">
-                <span className="h-px w-8 bg-[#C5A880]" />
+              <div className="mb-6 flex items-center gap-3">
+                <span className="h-px w-10 bg-[#C5A880]" />
 
-                <p className="text-xs uppercase tracking-[0.3em] text-[#8B7355]">
+                <p className="text-[10px] uppercase tracking-[0.32em] text-[#8B7355] sm:text-xs">
                   Explore the world
                 </p>
               </div>
 
-              <h2 className="font-serif text-3xl leading-tight text-[#0B0B0B] sm:text-5xl">
-                Popular destinations.
+              <h2 className="max-w-xl font-serif text-4xl leading-[1.05] text-[#0B0B0B] sm:text-5xl lg:text-6xl">
+                Places worth
+                <span className="block text-[#8B7355]">
+                  discovering.
+                </span>
               </h2>
             </div>
           </ScrollReveal>
 
-          <ScrollReveal delay={150}>
-            <div className="self-end">
-              <Link
-                to="/hotels"
-                className="group flex w-fit items-center gap-3 text-[12px] uppercase tracking-[0.2em] text-[#0B0B0B] transition-colors duration-300 hover:text-[#8B7355] sm:text-sm"
-              >
-                <span>Explore all</span>
+          <ScrollReveal direction="up" delay={150}>
+            <Link
+              to="/hotels"
+              className="group flex w-fit items-center gap-4 text-[10px] uppercase tracking-[0.25em] text-[#0B0B0B] transition-colors duration-300 hover:text-[#8B7355] sm:text-xs"
+            >
+              <span>Explore all stays</span>
 
-                <span className="h-px w-8 bg-[#0B0B0B] transition-all duration-300 group-hover:w-12 group-hover:bg-[#8B7355]" />
-              </Link>
-            </div>
+              <span className="relative flex items-center">
+                <span className="h-px w-8 bg-[#0B0B0B] transition-all duration-500 group-hover:w-12 group-hover:bg-[#8B7355]" />
+
+                
+              </span>
+            </Link>
           </ScrollReveal>
-
         </div>
 
         {/* Moving Cards */}
-        <ScrollReveal>
+        <ScrollReveal direction="up" delay={100}>
           <div className="relative overflow-hidden">
+            {/* Edge fade */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-8 bg-gradient-to-r from-[#F5F1EA] to-transparent sm:w-12" />
 
-            <div className="popular-destinations-track flex w-max gap-8">
+            <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-8 bg-gradient-to-l from-[#F5F1EA] to-transparent sm:w-12" />
 
-              {/* First set */}
+            <div className="popular-destinations-track flex w-max gap-5 sm:gap-6">
               {destinations.map((destination, index) => (
                 <DestinationCard
                   key={`first-${destination.id}`}
@@ -57,7 +60,6 @@ function PopularDestinations() {
                 />
               ))}
 
-              {/* Duplicate set for seamless loop */}
               {destinations.map((destination, index) => (
                 <DestinationCard
                   key={`second-${destination.id}`}
@@ -66,16 +68,14 @@ function PopularDestinations() {
                   ariaHidden
                 />
               ))}
-
             </div>
           </div>
         </ScrollReveal>
-
       </div>
 
       <style>{`
         .popular-destinations-track {
-          animation: popularDestinationsMove 28s linear infinite;
+          animation: popularDestinationsMove 32s linear infinite;
         }
 
         .popular-destinations-track:hover {
@@ -88,7 +88,13 @@ function PopularDestinations() {
           }
 
           to {
-            transform: translateX(calc(-50% - 16px));
+            transform: translateX(calc(-50% - 10px));
+          }
+        }
+
+        @media (max-width: 640px) {
+          .popular-destinations-track {
+            animation-duration: 28s;
           }
         }
 
@@ -104,6 +110,7 @@ function PopularDestinations() {
 
 function DestinationCard({
   destination,
+  index,
   ariaHidden = false,
 }) {
   return (
@@ -114,94 +121,146 @@ function DestinationCard({
       className="
         group
         block
-        w-[230px]
+        w-[250px]
         shrink-0
-        sm:w-[260px]
-        lg:w-[270px]
-        xl:w-[280px]
+        sm:w-[285px]
+        lg:w-[310px]
       "
     >
-      <div
+      <article
         className="
-          relative
-          h-90
+          flex
+          h-[390px]
           w-full
+          flex-col
           overflow-hidden
-
           border
           border-[#D8CCBA]
-
           bg-[#0B0B0B]
-
-          shadow-[12px_17px_51px_rgba(11,11,11,0.12)]
-
+          shadow-[0_20px_50px_rgba(11,11,11,0.10)]
           transition-all
-          duration-500
+          duration-700
           ease-out
-
+          group-hover:-translate-y-2
           group-hover:border-[#C5A880]
-          group-hover:shadow-[0_0_0_1px_#C5A880,0_0_30px_rgba(197,168,128,0.35)]
+          group-hover:shadow-[0_25px_70px_rgba(11,11,11,0.18)]
         "
       >
-
         {/* Image */}
-        <img
-          src={destination.image}
-          alt={destination.name}
-          className="
-            absolute
-            inset-0
-            h-full
-            w-full
-            object-cover
+        <div className="relative min-h-0 flex-1 overflow-hidden">
+          <img
+            src={destination.image}
+            alt={destination.name}
+            className="
+              h-full
+              w-full
+              object-cover
+              transition-transform
+              duration-1000
+              ease-out
+              group-hover:scale-110
+            "
+          />
 
-            transition-transform
-            duration-700
-            ease-out
+          <div
+            className="
+              pointer-events-none
+              absolute
+              inset-0
+              bg-gradient-to-t
+              from-[#0B0B0B]/70
+              via-[#0B0B0B]/10
+              to-transparent
+              transition-all
+              duration-700
+              group-hover:from-[#0B0B0B]/80
+            "
+          />
 
-            group-hover:scale-105
-          "
-        />
+          {/* Image top information */}
+          <div className="absolute inset-x-0 top-0 flex items-center justify-between p-5">
+            <span
+              className="
+                font-serif
+                text-sm
+                text-white/70
+                transition-colors
+                duration-500
+                group-hover:text-[#C5A880]
+              "
+            >
+              {String(index + 1).padStart(2, '0')}
+            </span>
 
-        {/* Dark Gradient */}
-        <div
-          className="
-            absolute
-            inset-0
-            bg-gradient-to-t
-            from-[#0B0B0B]/80
-            via-[#0B0B0B]/15
-            to-transparent
+            <div
+              className="
+                flex
+                h-9
+                w-9
+                items-center
+                justify-center
+                border
+                border-white/20
+                bg-black/10
+                backdrop-blur-sm
+                transition-all
+                duration-500
+                group-hover:border-[#C5A880]
+                group-hover:bg-[#C5A880]
+              "
+            >
+              <span className="text-sm text-white transition-colors duration-500 group-hover:text-[#0B0B0B]">
+                ↗
+              </span>
+            </div>
+          </div>
+        </div>
 
-            transition-opacity
-            duration-500
+        {/* Card Content */}
+        <div className="flex shrink-0 flex-col bg-[#0B0B0B] p-6 sm:p-7">
+          <div className="mb-4 flex items-center gap-3">
+            <span className="h-px w-7 bg-[#C5A880]" />
 
-            group-hover:from-[#0B0B0B]/90
-          "
-        />
-
-        {/* Destination Name */}
-        <div className="absolute inset-x-0 bottom-0 p-6">
+            <span className="text-[9px] uppercase tracking-[0.28em] text-white/60">
+              Destination
+            </span>
+          </div>
 
           <h3
             className="
               font-serif
-              text-2xl
-              leading-tight
+              text-3xl
+              leading-none
               text-[#F5F1EA]
-
               transition-transform
               duration-500
-
               group-hover:-translate-y-1
             "
           >
             {destination.name}
           </h3>
 
-        </div>
+          <div
+            className="
+              mt-5
+              flex
+              items-center
+              gap-3
+              overflow-hidden
+              opacity-0
+              transition-all
+              duration-500
+              group-hover:opacity-100
+            "
+          >
+            <span className="text-[9px] uppercase tracking-[0.22em] text-white/70">
+              Explore stays
+            </span>
 
-      </div>
+            <span className="h-px w-8 bg-[#C5A880]" />
+          </div>
+        </div>
+      </article>
     </Link>
   )
 }
