@@ -1,3 +1,4 @@
+
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
@@ -55,24 +56,50 @@ function Navbar() {
         {/* Desktop Right Side */}
         <div className="hidden items-center gap-7 md:flex">
           {user ? (
-            <Link
-              to="/account"
-              className="group flex items-center gap-3"
-            >
-              <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#C5A880]/50 bg-[#C5A880]/10 font-serif text-sm text-[#C5A880] transition duration-300 group-hover:bg-[#C5A880] group-hover:text-[#0B0B0B]">
-                {user.firstName?.charAt(0).toUpperCase()}
-              </span>
+            <div className="flex items-center gap-6">
 
-              <span className="flex flex-col">
-                <span className="text-sm tracking-wide text-white transition group-hover:text-[#C5A880]">
-                  {user.firstName} {user.lastName}
+              {/* Wishlist */}
+              <Link
+                to="/wishlist"
+                aria-label="Wishlist"
+                className="group flex h-9 w-9 items-center justify-center text-white/80 transition duration-300 hover:text-[#C5A880]"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5"
+                >
+                  <path
+                    d="M6 3.75H18C18.4142 3.75 18.75 4.08579 18.75 4.5V20.25L12 16.5L5.25 20.25V4.5C5.25 4.08579 5.58579 3.75 6 3.75Z"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
+
+              {/* Account */}
+              <Link
+                to="/account"
+                className="group flex items-center gap-3"
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#C5A880]/50 bg-[#C5A880]/10 font-serif text-sm text-[#C5A880] transition duration-300 group-hover:bg-[#C5A880] group-hover:text-[#0B0B0B]">
+                  {user.firstName?.charAt(0).toUpperCase()}
                 </span>
 
-                <span className="mt-0.5 text-[9px] uppercase tracking-[0.2em] text-white/40">
-                  Account
+                <span className="flex flex-col">
+                  <span className="text-sm tracking-wide text-white transition group-hover:text-[#C5A880]">
+                    {user.firstName} {user.lastName}
+                  </span>
+
+                  <span className="mt-0.5 text-[9px] uppercase tracking-[0.2em] text-white/40">
+                    Account
+                  </span>
                 </span>
-              </span>
-            </Link>
+              </Link>
+            </div>
           ) : (
             <div className="flex items-center gap-5">
 
@@ -145,25 +172,61 @@ function Navbar() {
 
           {/* Account */}
           {user && (
-            <Link
-              to="/account"
-              onClick={closeMenu}
-              className="group flex items-center gap-3 border border-white/10 bg-white/[0.03] p-4 sm:p-5"
-            >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#C5A880]/50 bg-[#C5A880]/10 font-serif text-sm text-[#C5A880] transition duration-300 group-hover:bg-[#C5A880] group-hover:text-[#0B0B0B]">
-                {user.firstName?.charAt(0).toUpperCase()}
-              </span>
+            <div className="flex flex-col gap-3">
 
-              <span className="flex flex-col">
-                <span className="text-sm text-white transition group-hover:text-[#C5A880] sm:text-base">
-                  {user.firstName} {user.lastName}
+              <Link
+                to="/account"
+                onClick={closeMenu}
+                className="group flex items-center gap-3 border border-white/10 bg-white/[0.03] p-4 sm:p-5"
+              >
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#C5A880]/50 bg-[#C5A880]/10 font-serif text-sm text-[#C5A880] transition duration-300 group-hover:bg-[#C5A880] group-hover:text-[#0B0B0B]">
+                  {user.firstName?.charAt(0).toUpperCase()}
                 </span>
 
-                <span className="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/40">
-                  Your account
+                <span className="flex flex-col">
+                  <span className="text-sm text-white transition group-hover:text-[#C5A880] sm:text-base">
+                    {user.firstName} {user.lastName}
+                  </span>
+
+                  <span className="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/40">
+                    Your account
+                  </span>
                 </span>
-              </span>
-            </Link>
+              </Link>
+
+              {/* Wishlist */}
+              <Link
+                to="/wishlist"
+                onClick={closeMenu}
+                className="group flex items-center justify-between border border-white/10 bg-white/[0.03] p-4 text-white transition hover:border-[#C5A880]/40 hover:text-[#C5A880] sm:p-5"
+              >
+                <span className="flex flex-col">
+                  <span className="text-sm sm:text-base">
+                    Saved stays
+                  </span>
+
+                  <span className="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/40">
+                    Your wishlist
+                  </span>
+                </span>
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5"
+                >
+                  <path
+                    d="M6 3.75H18C18.4142 3.75 18.75 4.08579 18.75 4.5V20.25L12 16.5L5.25 20.25V4.5C5.25 4.08579 5.58579 3.75 6 3.75Z"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </Link>
+
+            </div>
           )}
 
           {/* Navigation */}
@@ -271,3 +334,4 @@ function Navbar() {
 }
 
 export default Navbar
+
