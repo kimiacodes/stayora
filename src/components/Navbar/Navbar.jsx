@@ -1,19 +1,34 @@
 
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import {
+  WalletCards,
+  Bookmark,
+  ClipboardList,
+  UserRoundPen,
+  LogOut,
+} from 'lucide-react'
+
 import { useAuth } from '../../context/AuthContext'
 
 function Navbar() {
   const { user, logout } = useAuth()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isAccountMenuOpen, setIsAccountMenuOpen] =
+    useState(false)
 
   const closeMenu = () => {
     setIsMenuOpen(false)
   }
 
+  const closeAccountMenu = () => {
+    setIsAccountMenuOpen(false)
+  }
+
   const handleLogout = () => {
     logout()
     closeMenu()
+    closeAccountMenu()
   }
 
   return (
@@ -45,60 +60,143 @@ function Navbar() {
             Destinations
           </Link>
 
-          <Link
-            to="/experiences"
-            className="text-sm tracking-wide text-white/80 transition hover:text-[#C5A880]"
-          >
-            Experiences
-          </Link>
+          <Link to="/payment"
+           className="text-sm tracking-wide text-white/80 transition hover:text-[#C5A880]">
+  Payment
+</Link>
         </div>
 
         {/* Desktop Right Side */}
-        <div className="hidden items-center gap-7 md:flex">
+        <div className="hidden items-center md:flex">
           {user ? (
-            <div className="flex items-center gap-6">
-
-              {/* Wishlist */}
-              <Link
-                to="/wishlist"
-                aria-label="Wishlist"
-                className="group flex h-9 w-9 items-center justify-center text-white/80 transition duration-300 hover:text-[#C5A880]"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5"
-                >
-                  <path
-                    d="M6 3.75H18C18.4142 3.75 18.75 4.08579 18.75 4.5V20.25L12 16.5L5.25 20.25V4.5C5.25 4.08579 5.58579 3.75 6 3.75Z"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Link>
+            <div className="flex items-center">
 
               {/* Account */}
-              <Link
-                to="/account"
-                className="group flex items-center gap-3"
+              <div
+                className="relative"
+                onMouseEnter={() =>
+                  setIsAccountMenuOpen(true)
+                }
+                onMouseLeave={() =>
+                  setIsAccountMenuOpen(false)
+                }
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#C5A880]/50 bg-[#C5A880]/10 font-serif text-sm text-[#C5A880] transition duration-300 group-hover:bg-[#C5A880] group-hover:text-[#0B0B0B]">
-                  {user.firstName?.charAt(0).toUpperCase()}
-                </span>
-
-                <span className="flex flex-col">
-                  <span className="text-sm tracking-wide text-white transition group-hover:text-[#C5A880]">
-                    {user.firstName} {user.lastName}
+                {/* Account Trigger */}
+                <div className="flex cursor-pointer items-center gap-3">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#C5A880]/50 bg-[#C5A880]/10 font-serif text-sm text-[#C5A880] transition duration-300 hover:bg-[#C5A880] hover:text-[#0B0B0B]">
+                    {user.firstName?.charAt(0).toUpperCase()}
                   </span>
 
-                  <span className="mt-0.5 text-[9px] uppercase tracking-[0.2em] text-white/40">
-                    Account
+                  <span className="flex flex-col">
+                    <span className="text-sm tracking-wide text-white transition hover:text-[#C5A880]">
+                      {user.firstName} {user.lastName}
+                    </span>
+
+                    <span className="mt-0.5 text-[9px] uppercase tracking-[0.2em] text-white/40">
+                      Account
+                    </span>
                   </span>
-                </span>
-              </Link>
+                </div>
+
+                {/* Invisible bridge to keep dropdown open */}
+                <div className="absolute right-0 top-full h-4 w-full" />
+
+                {/* Account Dropdown */}
+                <div
+                  className={`absolute -right-12 top-[calc(100%+16px)] w-[220px] transition-all duration-200 ${
+                    isAccountMenuOpen
+                      ? 'pointer-events-auto translate-y-0 opacity-100'
+                      : 'pointer-events-none -translate-y-2 opacity-0'
+                  }`}
+                >
+                  <div className="overflow-hidden border border-white/10 bg-[#0B0B0B]/98 shadow-2xl shadow-black/30 backdrop-blur-xl">
+
+                    {/* Saved stays */}
+                    <Link
+                      to="/wishlist"
+                      onClick={closeAccountMenu}
+                      className="group flex items-center gap-3 border-b border-white/10 px-4 py-3.5 text-white/80 transition hover:bg-white/[0.04] hover:text-[#C5A880]"
+                    >
+                      <Bookmark
+                        size={17}
+                        strokeWidth={1.5}
+                        className="shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5"
+                      />
+
+                      <span className="text-xs tracking-wide">
+                        Saved stays
+                      </span>
+                    </Link>
+
+                    {/* Wallet */}
+                    <Link
+                      to="/wallet"
+                      onClick={closeAccountMenu}
+                      className="group flex items-center gap-3 border-b border-white/10 px-4 py-3.5 text-white/80 transition hover:bg-white/[0.04] hover:text-[#C5A880]"
+                    >
+                      <WalletCards
+                        size={17}
+                        strokeWidth={1.5}
+                        className="shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5"
+                      />
+
+                      <span className="text-xs tracking-wide">
+                        Wallet
+                      </span>
+                    </Link>
+
+                    {/* My bookings */}
+                    <Link
+                      to="/my-bookings"
+                      onClick={closeAccountMenu}
+                      className="group flex items-center gap-3 border-b border-white/10 px-4 py-3.5 text-white/80 transition hover:bg-white/[0.04] hover:text-[#C5A880]"
+                    >
+                      <ClipboardList
+                        size={17}
+                        strokeWidth={1.5}
+                        className="shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5"
+                      />
+
+                      <span className="text-xs tracking-wide">
+                        My bookings
+                      </span>
+                    </Link>
+
+                    {/* Change information */}
+                    <Link
+                      to="/account"
+                      onClick={closeAccountMenu}
+                      className="group flex items-center gap-3 border-b border-white/10 px-4 py-3.5 text-white/80 transition hover:bg-white/[0.04] hover:text-[#C5A880]"
+                    >
+                      <UserRoundPen
+                        size={17}
+                        strokeWidth={1.5}
+                        className="shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5"
+                      />
+
+                      <span className="text-xs tracking-wide">
+                        Change my information
+                      </span>
+                    </Link>
+
+                    <button
+  type="button"
+  onClick={handleLogout}
+  className="group flex w-full items-center gap-3 border-t border-white/10 px-4 py-3.5 text-left text-xs tracking-wide text-white/80 transition duration-300 hover:bg-red-500/5 hover:text-red-400"
+>
+  <LogOut
+    size={17}
+    strokeWidth={1.5}
+    className="shrink-0 transition-transform duration-300 group-hover:translate-x-0.5"
+  />
+
+  <span>Logout</span>
+</button>
+
+                  </div>
+                </div>
+              </div>
+
             </div>
           ) : (
             <div className="flex items-center gap-5">
@@ -164,77 +262,114 @@ function Navbar() {
       <div
         className={`overflow-hidden border-t border-white/10 bg-[#0B0B0B]/98 backdrop-blur-xl transition-all duration-500 md:hidden ${
           isMenuOpen
-            ? 'max-h-150 opacity-100'
+            ? 'max-h-160 opacity-100'
             : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="px-5 py-6 sm:px-6 sm:py-7">
+        <div className="px-5 py-4 sm:px-6 sm:py-5">
 
           {/* Account */}
           {user && (
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-2">
 
+              {/* Account */}
               <Link
                 to="/account"
                 onClick={closeMenu}
-                className="group flex items-center gap-3 border border-white/10 bg-white/[0.03] p-4 sm:p-5"
+                className="group flex items-center gap-3 border border-white/10 bg-white/[0.03] px-3.5 py-3 transition hover:border-[#C5A880]/40 sm:px-4 sm:py-3.5"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#C5A880]/50 bg-[#C5A880]/10 font-serif text-sm text-[#C5A880] transition duration-300 group-hover:bg-[#C5A880] group-hover:text-[#0B0B0B]">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#C5A880]/50 bg-[#C5A880]/10 font-serif text-sm text-[#C5A880] transition duration-300 group-hover:bg-[#C5A880] group-hover:text-[#0B0B0B]">
                   {user.firstName?.charAt(0).toUpperCase()}
                 </span>
 
                 <span className="flex flex-col">
-                  <span className="text-sm text-white transition group-hover:text-[#C5A880] sm:text-base">
+                  <span className="text-sm text-white transition group-hover:text-[#C5A880]">
                     {user.firstName} {user.lastName}
                   </span>
 
-                  <span className="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/40">
+                  <span className="mt-0.5 text-[8px] uppercase tracking-[0.2em] text-white/40">
                     Your account
                   </span>
                 </span>
               </Link>
 
-              {/* Wishlist */}
+              {/* Saved stays */}
               <Link
                 to="/wishlist"
                 onClick={closeMenu}
-                className="group flex items-center justify-between border border-white/10 bg-white/[0.03] p-4 text-white transition hover:border-[#C5A880]/40 hover:text-[#C5A880] sm:p-5"
+                className="group flex items-center gap-3 border border-white/10 bg-white/[0.03] px-3.5 py-3 text-white transition hover:border-[#C5A880]/40 hover:text-[#C5A880] sm:px-4 sm:py-3.5"
               >
-                <span className="flex flex-col">
-                  <span className="text-sm sm:text-base">
-                    Saved stays
-                  </span>
+                <Bookmark
+                  size={17}
+                  strokeWidth={1.5}
+                  className="shrink-0"
+                />
 
-                  <span className="mt-1 text-[9px] uppercase tracking-[0.2em] text-white/40">
-                    Your wishlist
-                  </span>
+                <span className="text-xs sm:text-sm">
+                  Saved stays
                 </span>
+              </Link>
 
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5"
-                >
-                  <path
-                    d="M6 3.75H18C18.4142 3.75 18.75 4.08579 18.75 4.5V20.25L12 16.5L5.25 20.25V4.5C5.25 4.08579 5.58579 3.75 6 3.75Z"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+              {/* Wallet */}
+              <Link
+                to="/wallet"
+                onClick={closeMenu}
+                className="group flex items-center gap-3 border border-white/10 bg-white/[0.03] px-3.5 py-3 text-white transition hover:border-[#C5A880]/40 hover:text-[#C5A880] sm:px-4 sm:py-3.5"
+              >
+                <WalletCards
+                  size={17}
+                  strokeWidth={1.5}
+                  className="shrink-0"
+                />
+
+                <span className="text-xs sm:text-sm">
+                  Wallet
+                </span>
+              </Link>
+
+              {/* My bookings */}
+              <Link
+                to="/my-bookings"
+                onClick={closeMenu}
+                className="group flex items-center gap-3 border border-white/10 bg-white/[0.03] px-3.5 py-3 text-white transition hover:border-[#C5A880]/40 hover:text-[#C5A880] sm:px-4 sm:py-3.5"
+              >
+                <ClipboardList
+                  size={17}
+                  strokeWidth={1.5}
+                  className="shrink-0"
+                />
+
+                <span className="text-xs sm:text-sm">
+                  My bookings
+                </span>
+              </Link>
+
+              {/* Change information */}
+              <Link
+                to="/account"
+                onClick={closeMenu}
+                className="group flex items-center gap-3 border border-white/10 bg-white/[0.03] px-3.5 py-3 text-white transition hover:border-[#C5A880]/40 hover:text-[#C5A880] sm:px-4 sm:py-3.5"
+              >
+                <UserRoundPen
+                  size={17}
+                  strokeWidth={1.5}
+                  className="shrink-0"
+                />
+
+                <span className="text-xs sm:text-sm">
+                  Change my information
+                </span>
               </Link>
 
             </div>
           )}
 
           {/* Navigation */}
-          <div className="mt-5 flex flex-col sm:mt-6">
+          <div className="mt-3 flex flex-col sm:mt-4">
             <Link
               to="/hotels"
               onClick={closeMenu}
-              className="border-b border-white/10 py-3.5 text-xs uppercase tracking-[0.15em] text-white/90 transition hover:text-[#C5A880] sm:py-4 sm:text-sm"
+              className="border-b border-white/10 py-2.5 text-[10px] uppercase tracking-[0.15em] text-white/90 transition hover:text-[#C5A880] sm:py-3 sm:text-xs"
             >
               Stays
             </Link>
@@ -242,27 +377,27 @@ function Navbar() {
             <Link
               to="/destinations"
               onClick={closeMenu}
-              className="border-b border-white/10 py-3.5 text-xs uppercase tracking-[0.15em] text-white/90 transition hover:text-[#C5A880] sm:py-4 sm:text-sm"
+              className="border-b border-white/10 py-2.5 text-[10px] uppercase tracking-[0.15em] text-white/90 transition hover:text-[#C5A880] sm:py-3 sm:text-xs"
             >
               Destinations
             </Link>
 
             <Link
-              to="/experiences"
+              to="/payment"
               onClick={closeMenu}
-              className="border-b border-white/10 py-3.5 text-xs uppercase tracking-[0.15em] text-white/90 transition hover:text-[#C5A880] sm:py-4 sm:text-sm"
+              className="border-b border-white/10 py-2.5 text-[10px] uppercase tracking-[0.15em] text-white/90 transition hover:text-[#C5A880] sm:py-3 sm:text-xs"
             >
-              Experiences
+              Payment
             </Link>
           </div>
 
           {/* Auth */}
-          <div className="mt-6">
+          <div className="mt-4">
             {user ? (
               <button
                 type="button"
                 onClick={handleLogout}
-                className="group relative w-full cursor-pointer overflow-hidden rounded-lg bg-[#0B0B0B] px-4 py-3 text-center text-[10px] uppercase tracking-[0.18em] text-white outline-offset-4 transition-transform duration-300 ease-in-out focus:outline-2 focus:outline-white focus:outline-offset-4"
+                className="group relative w-full cursor-pointer overflow-hidden rounded-lg bg-[#0B0B0B] px-4 py-2.5 text-center text-[9px] uppercase tracking-[0.18em] text-white outline-offset-4 transition-transform duration-300 ease-in-out focus:outline-2 focus:outline-white focus:outline-offset-4"
               >
                 <span className="relative z-20">
                   Logout
@@ -285,7 +420,7 @@ function Navbar() {
                 <Link
                   to="/login"
                   onClick={closeMenu}
-                  className="group relative flex flex-1 cursor-pointer items-center justify-center overflow-hidden bg-[#0B0B0B] px-4 py-3 text-center text-[10px] uppercase tracking-[0.18em] text-white outline-offset-4 transition-transform duration-300 ease-in-out focus:outline-2 focus:outline-white focus:outline-offset-4"
+                  className="group relative flex flex-1 cursor-pointer items-center justify-center overflow-hidden bg-[#0B0B0B] px-4 py-2.5 text-center text-[9px] uppercase tracking-[0.18em] text-white outline-offset-4 transition-transform duration-300 ease-in-out focus:outline-2 focus:outline-white focus:outline-offset-4"
                 >
                   <span className="relative z-20">
                     Login
@@ -306,7 +441,7 @@ function Navbar() {
                 <Link
                   to="/register"
                   onClick={closeMenu}
-                  className="group relative flex flex-1 cursor-pointer items-center justify-center overflow-hidden bg-[#0B0B0B] px-4 py-3 text-center text-[10px] uppercase tracking-[0.18em] text-white outline-offset-4 transition-transform duration-300 ease-in-out focus:outline-2 focus:outline-white focus:outline-offset-4"
+                  className="group relative flex flex-1 cursor-pointer items-center justify-center overflow-hidden bg-[#0B0B0B] px-4 py-2.5 text-center text-[9px] uppercase tracking-[0.18em] text-white outline-offset-4 transition-transform duration-300 ease-in-out focus:outline-2 focus:outline-white focus:outline-offset-4"
                 >
                   <span className="relative z-20">
                     Sign in
@@ -334,4 +469,3 @@ function Navbar() {
 }
 
 export default Navbar
-

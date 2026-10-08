@@ -82,7 +82,7 @@ function Footer() {
 
                 <div className="mt-7 flex flex-col gap-4">
                   <Link
-                    to="/about"
+                    to="/About"
                     className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]"
                   >
                     About

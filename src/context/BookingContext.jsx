@@ -1,11 +1,19 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
 const BookingContext = createContext()
 
 export function BookingProvider({ children }) {
   const [bookings, setBookings] = useState(() => {
     try {
-      const savedBookings = localStorage.getItem('stayora-bookings')
+      const savedBookings = localStorage.getItem(
+        'stayora-bookings'
+      )
 
       if (!savedBookings) {
         return []
@@ -17,11 +25,41 @@ export function BookingProvider({ children }) {
         ? parsedBookings
         : []
     } catch (error) {
-      console.error('Could not load saved bookings:', error)
+      console.error(
+        'Could not load saved bookings:',
+        error
+      )
 
       localStorage.removeItem('stayora-bookings')
 
       return []
+    }
+  })
+
+  const [walletBalance, setWalletBalance] = useState(() => {
+    try {
+      const savedWallet = localStorage.getItem(
+        'stayora-wallet'
+      )
+
+      if (!savedWallet) {
+        return 0
+      }
+
+      const parsedWallet = Number(savedWallet)
+
+      return Number.isFinite(parsedWallet)
+        ? parsedWallet
+        : 0
+    } catch (error) {
+      console.error(
+        'Could not load wallet balance:',
+        error
+      )
+
+      localStorage.removeItem('stayora-wallet')
+
+      return 0
     }
   })
 
@@ -32,9 +70,26 @@ export function BookingProvider({ children }) {
         JSON.stringify(bookings)
       )
     } catch (error) {
-      console.error('Could not save bookings:', error)
+      console.error(
+        'Could not save bookings:',
+        error
+      )
     }
   }, [bookings])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(
+        'stayora-wallet',
+        String(walletBalance)
+      )
+    } catch (error) {
+      console.error(
+        'Could not save wallet balance:',
+        error
+      )
+    }
+  }, [walletBalance])
 
   function addBooking(newBooking) {
     setBookings((currentBookings) => [
@@ -54,12 +109,55 @@ export function BookingProvider({ children }) {
     )
   }
 
+  function addToWallet(amount) {
+    const refundAmount = Number(amount)
+
+    if (
+      !Number.isFinite(refundAmount) ||
+      refundAmount <= 0
+    ) {
+      return
+    }
+
+    setWalletBalance((currentBalance) =>
+      Number(
+        (currentBalance + refundAmount).toFixed(2)
+      )
+    )
+  }
+
+  function payWithWallet(amount) {
+    const paymentAmount = Number(amount)
+
+    if (
+      !Number.isFinite(paymentAmount) ||
+      paymentAmount <= 0
+    ) {
+      return false
+    }
+
+    if (walletBalance < paymentAmount) {
+      return false
+    }
+
+    setWalletBalance((currentBalance) =>
+      Number(
+        (currentBalance - paymentAmount).toFixed(2)
+      )
+    )
+
+    return true
+  }
+
   return (
     <BookingContext.Provider
       value={{
         bookings,
+        walletBalance,
         addBooking,
         removeBooking,
+        addToWallet,
+        payWithWallet,
       }}
     >
       {children}
@@ -70,3 +168,4 @@ export function BookingProvider({ children }) {
 export function useBooking() {
   return useContext(BookingContext)
 }
+

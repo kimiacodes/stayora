@@ -1,5 +1,7 @@
 
 import { Link, useSearchParams } from 'react-router-dom'
+import { Bookmark } from 'lucide-react'
+
 import { useWishlist } from '../../context/WishlistContext'
 import { useAuth } from '../../context/AuthContext'
 
@@ -66,7 +68,6 @@ function HotelCard({ hotel, delay = 0 }) {
         hover:shadow-[0_18px_40px_rgba(11,11,11,0.12)]
       "
     >
-
       {/* Image */}
       <Link
         to={detailsUrl}
@@ -165,17 +166,15 @@ function HotelCard({ hotel, delay = 0 }) {
         <div
           className="
             mt-auto
-            flex
-            items-end
-            justify-between
-            gap-4
+           flex flex-col gap-2
             border-t
             border-[#D8CCBA]
             pt-4
+          
           "
         >
-
           {/* Price */}
+          
           <p className="text-xs text-gray-500 sm:text-sm">
             From
             <span className="ml-1 font-medium text-[#0B0B0B]">
@@ -187,8 +186,8 @@ function HotelCard({ hotel, delay = 0 }) {
           </p>
 
           {/* Actions */}
-          <div className="flex items-center gap-4">
-
+          <div className="flex items-center justify-between gap-4">
+      
             {/* View Stay */}
             <Link
               to={detailsUrl}
@@ -221,9 +220,10 @@ function HotelCard({ hotel, delay = 0 }) {
                 "
               />
             </Link>
-
+            
             {/* Bookmark - Logged in users only */}
             {user && (
+              <div className="mt-3 flex justify-end ">
               <button
                 type="button"
                 onClick={handleWishlistClick}
@@ -259,36 +259,27 @@ function HotelCard({ hotel, delay = 0 }) {
                   {isSaved ? 'Saved' : 'Save'}
                 </span>
 
-                <svg
-                  viewBox="0 0 24 24"
+                <Bookmark
+                  size={20}
+                  strokeWidth={1.7}
                   fill={isSaved ? 'currentColor' : 'none'}
-                  xmlns="http://www.w3.org/2000/svg"
                   className="
-                    h-5
-                    w-5
                     shrink-0
-                    stroke-current
                     transition-all
                     duration-300
                     group-hover/bookmark:scale-110
                   "
-                  strokeWidth="1.7"
-                >
-                  <path
-                    d="M6.5 4.75A1.75 1.75 0 0 1 8.25 3h7.5a1.75 1.75 0 0 1 1.75 1.75v16.1l-5.5-3.4-5.5 3.4V4.75Z"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                />
               </button>
+              </div>
             )}
+            </div>
 
           </div>
         </div>
-      </div>
+      
     </article>
   )
 }
 
 export default HotelCard
-

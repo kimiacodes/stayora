@@ -17,6 +17,12 @@ import Register from './pages/Register/Register'
 import Login from './pages/Login/Login'
 import Account from './pages/Account/Account'
 import Wishlist from './pages/Wishlist/Wishlist'
+import Destinations from './pages/Destinations/Destinations'
+import Experiences from './pages/Experiences/Experiences'
+import Wallet from './pages/Wallet/Wallet'
+import Payment from './pages/Payment/Payment'
+
+
 
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
@@ -60,6 +66,13 @@ function App() {
                 path="/checkout"
                 element={<Checkout />}
               />
+              <Route path="/destinations" element={<Destinations />} />
+              <Route path="/experiences" element={<Experiences />} />
+              <Route path="/wallet" element={<Wallet />} />
+              <Route path="/payment" element={<Payment />} />
+              
+
+              
 
               <Route
                 path="/my-bookings"
