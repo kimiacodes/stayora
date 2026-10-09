@@ -57,14 +57,14 @@ function HomeCTA() {
     text-white
     shadow-[6px_6px_0_#8B7355]
     transition-all
-    duration-500
+    duration-150
     ease-in-out
     hover:shadow-[10px_10px_0_#C5A880]
     focus:outline-none
     focus-visible:ring-2
     focus-visible:ring-[#C5A880]
     focus-visible:ring-offset-4
-    focus-visible:ring-offset-[#F5F1EA]
+    focus-visible:ring-offset-[#0B0B0B]
     [transform:skewX(-15deg)]
   "
 >
@@ -79,7 +79,7 @@ function HomeCTA() {
       items-center
       justify-center
       transition-all
-      duration-500
+      duration-150
       group-hover:mr-3
     "
   >
@@ -92,9 +92,9 @@ function HomeCTA() {
         shrink-0
         -translate-x-3
         transition-all
-        duration-500
+        duration-150
         group-hover:translate-x-0
-        group-hover:animate-[color_anim_1s_ease-in-out_infinite]
+        group-hover:animate-[color_anim_0.6s_ease-in-out_infinite]
       "
     >
       <path

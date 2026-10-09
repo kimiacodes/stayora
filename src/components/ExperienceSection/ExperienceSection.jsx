@@ -80,7 +80,7 @@ function ExperienceSection() {
     text-[#0B0B0B]
     shadow-[6px_6px_0_#0B0B0B]
     transition-all
-    duration-500
+    duration-150
     ease-in-out
     hover:shadow-[10px_10px_0_#C5A880]
     focus:outline-none
@@ -102,7 +102,7 @@ function ExperienceSection() {
       items-center
       justify-center
       transition-all
-      duration-500
+      duration-150
       group-hover:mr-3
     "
   >
@@ -115,9 +115,9 @@ function ExperienceSection() {
         shrink-0
         -translate-x-3
         transition-all
-        duration-500
+        duration-150
         group-hover:translate-x-0
-        group-hover:animate-[color_anim_1s_ease-in-out_infinite]
+        group-hover:animate-[color_anim_0.6s_ease-in-out_infinite]
       "
     >
       <path
