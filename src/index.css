@@ -73,3 +73,141 @@
 .animate-preloader-subtitle {
   animation: preloaderSubtitle 500ms ease-out 650ms forwards;
 }
+
+
+.ui-bookmark {
+  --bookmark-gold: #C5A880;
+  --bookmark-muted: #8B7355;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.ui-bookmark input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bookmark-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bookmark-muted);
+}
+
+.bookmark {
+  position: relative;
+  z-index: 1;
+  overflow: visible;
+  transition:
+    color 200ms ease,
+    fill 200ms ease,
+    transform 200ms ease;
+  transform-origin: top center;
+}
+
+.ui-bookmark:hover .bookmark {
+  color: var(--bookmark-gold);
+}
+
+.ui-bookmark.is-saved .bookmark {
+  color: var(--bookmark-gold);
+}
+
+.ui-bookmark.is-saved .bookmark {
+  animation: bookmark-pop 300ms
+    cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.bookmark-circle {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  border: 1px solid var(--bookmark-gold);
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bookmark-sparks {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow:
+    0 -25px 0 -1px var(--bookmark-gold),
+    0 25px 0 -1px var(--bookmark-gold),
+    25px 0 0 -1px var(--bookmark-gold),
+    -25px 0 0 -1px var(--bookmark-gold),
+    18px 18px 0 -1px var(--bookmark-gold),
+    -18px 18px 0 -1px var(--bookmark-gold),
+    18px -18px 0 -1px var(--bookmark-gold),
+    -18px -18px 0 -1px var(--bookmark-gold);
+}
+
+.ui-bookmark.is-saved .bookmark-circle {
+  animation: bookmark-circle 450ms ease-out forwards;
+}
+
+.ui-bookmark.is-saved .bookmark-sparks {
+  animation: bookmark-sparks 450ms ease-out 100ms forwards;
+}
+
+@keyframes bookmark-pop {
+  0% {
+    transform: scaleY(1);
+  }
+
+  50% {
+    transform: scaleY(0.6);
+  }
+
+  100% {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes bookmark-circle {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  75% {
+    width: 35px;
+    height: 35px;
+    opacity: 1;
+  }
+
+  100% {
+    width: 35px;
+    height: 35px;
+    opacity: 0;
+  }
+}
+
+@keyframes bookmark-sparks {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+}
+

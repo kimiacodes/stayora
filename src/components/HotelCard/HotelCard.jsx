@@ -221,58 +221,38 @@ function HotelCard({ hotel, delay = 0 }) {
               />
             </Link>
             
-            {/* Bookmark - Logged in users only */}
-            {user && (
-              <div className="mt-3 flex justify-end ">
-              <button
-                type="button"
-                onClick={handleWishlistClick}
-                aria-label={
-                  isSaved
-                    ? `Remove ${hotel.name} from wishlist`
-                    : `Save ${hotel.name} to wishlist`
-                }
-                className="
-                  group/bookmark
-                  flex
-                  items-center
-                  gap-2
-                  text-[#0B0B0B]
-                  transition-colors
-                  duration-300
-                  hover:text-[#8B7355]
-                "
-              >
-                <span
-                  className="
-                    text-[9px]
-                    uppercase
-                    tracking-[0.15em]
-                    text-[#8B7355]
-                    opacity-0
-                    transition-all
-                    duration-300
-                    group-hover/bookmark:opacity-100
-                    max-sm:hidden
-                  "
-                >
-                  {isSaved ? 'Saved' : 'Save'}
-                </span>
+           
+{/* Animated Bookmark */}
+{user && (
+  <label
+    className={`ui-bookmark ${isSaved ? 'is-saved' : ''}`}
+    title={isSaved ? 'Remove from wishlist' : 'Save to wishlist'}
+  >
+    <input
+      type="checkbox"
+      checked={isSaved}
+      onChange={handleWishlistClick}
+      aria-label={
+        isSaved
+          ? `Remove ${hotel.name} from wishlist`
+          : `Save ${hotel.name} to wishlist`
+      }
+    />
 
-                <Bookmark
-                  size={20}
-                  strokeWidth={1.7}
-                  fill={isSaved ? 'currentColor' : 'none'}
-                  className="
-                    shrink-0
-                    transition-all
-                    duration-300
-                    group-hover/bookmark:scale-110
-                  "
-                />
-              </button>
-              </div>
-            )}
+    <span className="bookmark-icon">
+      <Bookmark
+        size={22}
+        strokeWidth={1.7}
+        className="bookmark"
+        fill={isSaved ? 'currentColor' : 'none'}
+      />
+
+      <span className="bookmark-circle" />
+      <span className="bookmark-sparks" />
+    </span>
+  </label>
+)}
+
             </div>
 
           </div>
