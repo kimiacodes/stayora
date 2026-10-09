@@ -39,58 +39,76 @@ function HomeCTA() {
           </p>
 
           {/* CTA */}
-          <Link
-            to="/hotels"
-            className="
-              group
-              relative
-              mt-10
-              inline-flex
-              h-[2.9em]
-              w-[8.5em]
-              items-center
-              justify-end
-              rounded-[11px]
-              border-[0.2em]
-              border-[#8B7355]
-              bg-transparent
-              text-[#0B0B0B]
-              transition-all
-              duration-500
-              ease-in-out
-              hover:bg-[#C5A880]
-              hover:text-[#0B0B0B]
-            "
-          >
+         
+<Link
+  to="/hotels"
+  className="
+    group
+    mt-10
+    inline-flex
+    items-center
+    justify-center
+    gap-4
+    border-none
+    bg-[#0B0B0B]
+    px-6
+    py-3
+    text-sm
+    text-white
+    shadow-[6px_6px_0_#8B7355]
+    transition-all
+    duration-500
+    ease-in-out
+    hover:shadow-[10px_10px_0_#C5A880]
+    focus:outline-none
+    focus-visible:ring-2
+    focus-visible:ring-[#C5A880]
+    focus-visible:ring-offset-4
+    focus-visible:ring-offset-[#F5F1EA]
+    [transform:skewX(-15deg)]
+  "
+>
+  <span className="[transform:skewX(15deg)]">
+    Explore stays
+  </span>
 
-            <span className="mr-[1.5em] text-xs">
-              Explore stays
-            </span>
+  <span
+    className="
+      flex
+      w-5
+      items-center
+      justify-center
+      transition-all
+      duration-500
+      group-hover:mr-3
+    "
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      className="
+        w-5
+        shrink-0
+        -translate-x-3
+        transition-all
+        duration-500
+        group-hover:translate-x-0
+        group-hover:animate-[color_anim_1s_ease-in-out_infinite]
+      "
+    >
+      <path
+        d="M5 12h14m-6-6 6 6-6 6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </span>
+</Link>
 
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="
-                absolute
-                left-[0.8em]
-                w-[1.6em]
-                transition-all
-                duration-500
-                ease-in-out
-                group-hover:translate-x-5px
-              "
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M5 12h14m-6-6 6 6-6 6"
-              />
-            </svg>
 
-          </Link>
 
         </div>
       </ScrollReveal>

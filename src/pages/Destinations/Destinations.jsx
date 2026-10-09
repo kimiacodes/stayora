@@ -55,7 +55,7 @@ function Destinations() {
     <main className="min-h-screen bg-[#F5F1EA]">
 
       {/* Hero */}
-      <section className="relative px-6 py-20 sm:py-24 lg:px-10 lg:py-28">
+      <section className="relative px-6 py-28 sm:py-32 lg:px-10 lg:py-30">
 
         <div className="mx-auto max-w-7xl">
 

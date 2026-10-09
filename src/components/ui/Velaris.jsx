@@ -182,61 +182,123 @@ const Velaris = ({
     ];
   };
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const container = containerRef.current;
 
-    if (!canvas || !container) return;
+useEffect(() => {
+  const canvas = canvasRef.current;
+  const container = containerRef.current;
 
-    const gl = canvas.getContext("webgl");
+  if (!canvas || !container) return;
 
-if (!gl) {
-  console.error("WebGL is not supported.");
-  return;
-}
+  let gl = null;
+  let animationFrame = null;
+  let disposed = false;
+  let resizeObserver = null;
+  let resources = null;
 
-console.log("WebGL initialized successfully");
+  const hexToRgb = (hex) => {
+    const h = hex.replace("#", "");
 
-    const createShader = (type, source) => {
-      const shader = gl.createShader(type);
+    return [
+      parseInt(h.slice(0, 2), 16) / 255,
+      parseInt(h.slice(2, 4), 16) / 255,
+      parseInt(h.slice(4, 6), 16) / 255,
+    ];
+  };
 
-      if (!shader) return null;
+  const resize = () => {
+    if (!gl || !canvas || !container) return;
 
-      gl.shaderSource(shader, source);
-      gl.compileShader(shader);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const width = container.clientWidth;
+    const height = container.clientHeight;
 
-      if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-        console.error(gl.getShaderInfoLog(shader));
-        gl.deleteShader(shader);
-        return null;
-      }
+    if (!width || !height) return;
 
-      return shader;
-    };
+    const pixelWidth = Math.round(width * dpr);
+    const pixelHeight = Math.round(height * dpr);
+
+    if (
+      canvas.width !== pixelWidth ||
+      canvas.height !== pixelHeight
+    ) {
+      canvas.width = pixelWidth;
+      canvas.height = pixelHeight;
+    }
+
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
+
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  };
+
+  const createShader = (context, type, source) => {
+    const shader = context.createShader(type);
+
+    if (!shader) return null;
+
+    context.shaderSource(shader, source);
+    context.compileShader(shader);
+
+    if (!context.getShaderParameter(shader, context.COMPILE_STATUS)) {
+      console.error(context.getShaderInfoLog(shader));
+      context.deleteShader(shader);
+      return null;
+    }
+
+    return shader;
+  };
+
+  const initializeWebGL = () => {
+    if (disposed) return;
+
+    gl = canvas.getContext("webgl", {
+      alpha: false,
+      antialias: false,
+      powerPreference: "default",
+    });
+
+    if (!gl) {
+      console.error("WebGL is not supported.");
+      return;
+    }
 
     const vertexShader = createShader(
+      gl,
       gl.VERTEX_SHADER,
       vertexShaderGLSL
     );
 
     const fragmentShader = createShader(
+      gl,
       gl.FRAGMENT_SHADER,
       fragmentShaderGLSL
     );
 
-    if (!vertexShader || !fragmentShader) return;
+    if (!vertexShader || !fragmentShader) {
+      if (vertexShader) gl.deleteShader(vertexShader);
+      if (fragmentShader) gl.deleteShader(fragmentShader);
+      return;
+    }
 
     const program = gl.createProgram();
 
-    if (!program) return;
+    if (!program) {
+      gl.deleteShader(vertexShader);
+      gl.deleteShader(fragmentShader);
+      return;
+    }
 
     gl.attachShader(program, vertexShader);
     gl.attachShader(program, fragmentShader);
-
     gl.linkProgram(program);
 
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
       console.error(gl.getProgramInfoLog(program));
+
+      gl.deleteProgram(program);
+      gl.deleteShader(vertexShader);
+      gl.deleteShader(fragmentShader);
+
       return;
     }
 
@@ -244,106 +306,60 @@ console.log("WebGL initialized successfully");
 
     const buffer = gl.createBuffer();
 
+    if (!buffer) {
+      gl.deleteProgram(program);
+      gl.deleteShader(vertexShader);
+      gl.deleteShader(fragmentShader);
+      return;
+    }
+
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
 
     gl.bufferData(
       gl.ARRAY_BUFFER,
       new Float32Array([
-        -1,
-        -1,
-         1,
-        -1,
-        -1,
-         1,
-         1,
-         1,
+        -1, -1,
+         1, -1,
+        -1,  1,
+         1,  1,
       ]),
       gl.STATIC_DRAW
     );
 
-    const position = gl.getAttribLocation(
-      program,
-      "position"
-    );
+    const position = gl.getAttribLocation(program, "position");
 
     gl.enableVertexAttribArray(position);
-
-    gl.vertexAttribPointer(
-      position,
-      2,
-      gl.FLOAT,
-      false,
-      0,
-      0
-    );
+    gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
 
     const locations = {
-      resolution: gl.getUniformLocation(
-        program,
-        "u_resolution"
-      ),
-
-      time: gl.getUniformLocation(
-        program,
-        "u_time"
-      ),
-
-      grain: gl.getUniformLocation(
-        program,
-        "u_grain"
-      ),
-
-      colors: gl.getUniformLocation(
-        program,
-        "u_colors"
-      ),
-
-      bg: gl.getUniformLocation(
-        program,
-        "u_bg"
-      ),
+      resolution: gl.getUniformLocation(program, "u_resolution"),
+      time: gl.getUniformLocation(program, "u_time"),
+      grain: gl.getUniformLocation(program, "u_grain"),
+      colors: gl.getUniformLocation(program, "u_colors"),
+      bg: gl.getUniformLocation(program, "u_bg"),
     };
 
-    const resize = () => {
-      const dpr = Math.min(
-        window.devicePixelRatio || 1,
-        2
-      );
-
-      const width = container.clientWidth;
-      const height = container.clientHeight;
-
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-
-      gl.viewport(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
+    resources = {
+      program,
+      vertexShader,
+      fragmentShader,
+      buffer,
+      locations,
     };
-
-    resize();
-
-    const resizeObserver = new ResizeObserver(resize);
-
-    resizeObserver.observe(container);
 
     const rgbColors = new Float32Array(
-      colors
-        .slice(0, 4)
-        .flatMap(hexToRgb)
+      colors.slice(0, 4).flatMap(hexToRgb)
     );
 
     const bgColor = hexToRgb(bg);
 
-    let animationFrame;
+    resize();
 
     const render = (time) => {
+      if (disposed || !gl || gl.isContextLost()) return;
+
+      gl.useProgram(program);
+
       gl.uniform2f(
         locations.resolution,
         canvas.width,
@@ -355,44 +371,75 @@ console.log("WebGL initialized successfully");
         time * 0.001 * speed
       );
 
-      gl.uniform1f(
-        locations.grain,
-        grain
-      );
+      gl.uniform1f(locations.grain, grain);
+      gl.uniform3f(locations.bg, ...bgColor);
+      gl.uniform3fv(locations.colors, rgbColors);
 
-      gl.uniform3f(
-        locations.bg,
-        ...bgColor
-      );
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
-      gl.uniform3fv(
-        locations.colors,
-        rgbColors
-      );
-
-      gl.drawArrays(
-        gl.TRIANGLE_STRIP,
-        0,
-        4
-      );
-
-      animationFrame =
-        requestAnimationFrame(render);
+      animationFrame = requestAnimationFrame(render);
     };
 
-    animationFrame =
-      requestAnimationFrame(render);
+    animationFrame = requestAnimationFrame(render);
+  };
 
-    return () => {
-      resizeObserver.disconnect();
+  const handleContextLost = (event) => {
+    event.preventDefault();
+
+    if (animationFrame !== null) {
       cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+    }
 
-      gl.deleteProgram(program);
-      gl.deleteShader(vertexShader);
-      gl.deleteShader(fragmentShader);
-      gl.deleteBuffer(buffer);
-    };
-  }, [bg, colors, speed, grain]);
+    gl = null;
+    resources = null;
+  };
+
+  const handleContextRestored = () => {
+    if (disposed) return;
+
+    initializeWebGL();
+  };
+
+  canvas.addEventListener("webglcontextlost", handleContextLost);
+  canvas.addEventListener("webglcontextrestored", handleContextRestored);
+
+  initializeWebGL();
+
+  resizeObserver = new ResizeObserver(() => {
+    resize();
+  });
+
+  resizeObserver.observe(container);
+
+  return () => {
+    disposed = true;
+
+    canvas.removeEventListener("webglcontextlost", handleContextLost);
+    canvas.removeEventListener(
+      "webglcontextrestored",
+      handleContextRestored
+    );
+
+    resizeObserver?.disconnect();
+
+    if (animationFrame !== null) {
+      cancelAnimationFrame(animationFrame);
+    }
+
+    if (gl && resources && !gl.isContextLost()) {
+      gl.deleteBuffer(resources.buffer);
+      gl.deleteProgram(resources.program);
+      gl.deleteShader(resources.vertexShader);
+      gl.deleteShader(resources.fragmentShader);
+    }
+
+    resources = null;
+    gl = null;
+  };
+}, [bg, colors, speed, grain]);
+
+
 
   return (
     <div
