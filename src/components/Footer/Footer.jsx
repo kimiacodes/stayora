@@ -51,26 +51,20 @@ function Footer() {
                 </h3>
 
                 <div className="mt-7 flex flex-col gap-4">
-                  <Link
-                    to="/hotels"
-                    className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]"
-                  >
-                    Stays
-                  </Link>
+                  {/* Stays */}
+<Link to="/hotels" className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]">
+  Stays
+</Link>
 
-                  <Link
-                    to="/destinations"
-                    className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]"
-                  >
-                    Destinations
-                  </Link>
+{/* Destinations */}
+<Link to="/destinations" className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]">
+  Destinations
+</Link>
 
-                  <Link
-                    to="/experiences"
-                    className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]"
-                  >
-                    Experiences
-                  </Link>
+{/* Experiences → Payment */}
+<Link to="/payment" className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]">
+  Payment
+</Link>
                 </div>
               </div>
 
@@ -81,26 +75,20 @@ function Footer() {
                 </h3>
 
                 <div className="mt-7 flex flex-col gap-4">
-                  <Link
-                    to="/About"
-                    className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]"
-                  >
-                    About
-                  </Link>
+                 {/* About */}
+<Link to="/aboutus" className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]">
+  About
+</Link>
 
-                  <Link
-                    to="/contact"
-                    className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]"
-                  >
-                    Contact
-                  </Link>
+{/* Contact */}
+<Link to="/contact" className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]">
+  Contact
+</Link>
 
-                  <Link
-                    to="/login"
-                    className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]"
-                  >
-                    Sign in
-                  </Link>
+{/* Sign in → Register */}
+<Link to="/register" className="w-fit text-sm text-[#B8AEA2] transition-colors duration-300 hover:text-[#C5A880]">
+  Sign in
+</Link>
                 </div>
               </div>
 

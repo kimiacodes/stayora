@@ -150,6 +150,7 @@ function MyBookings() {
 
             <div className="mt-10 flex justify-center border-t border-[#D8D0C4] pt-8">
              
+
 <Link
   to="/hotels"
   className="
@@ -160,12 +161,12 @@ function MyBookings() {
     justify-center
     gap-4
     border-none
-    bg-[#F5F1EA]
+    bg-[#0B0B0B]
     px-6
     py-3
     text-sm
-    text-[#0B0B0B]
-    shadow-[6px_6px_0_#0B0B0B]
+    text-white
+    shadow-[6px_6px_0_#8B7355]
     transition-all
     duration-150
     ease-in-out
@@ -174,7 +175,7 @@ function MyBookings() {
     focus-visible:ring-2
     focus-visible:ring-[#C5A880]
     focus-visible:ring-offset-4
-    focus-visible:ring-offset-[#F5F1EA]
+    focus-visible:ring-offset-[#0B0B0B]
     [transform:skewX(-15deg)]
   "
 >
@@ -217,6 +218,7 @@ function MyBookings() {
     </svg>
   </span>
 </Link>
+
 
 
             </div>
@@ -590,6 +592,7 @@ function MyBookings() {
         <section className="mt-16 border-t border-[#D8D0C4] pt-10">
           <div className="flex justify-center">
            
+
 <Link
   to="/hotels"
   className="
@@ -600,12 +603,12 @@ function MyBookings() {
     justify-center
     gap-4
     border-none
-    bg-[#F5F1EA]
+    bg-[#0B0B0B]
     px-6
     py-3
     text-sm
-    text-[#0B0B0B]
-    shadow-[6px_6px_0_#0B0B0B]
+    text-white
+    shadow-[6px_6px_0_#8B7355]
     transition-all
     duration-150
     ease-in-out
@@ -614,7 +617,7 @@ function MyBookings() {
     focus-visible:ring-2
     focus-visible:ring-[#C5A880]
     focus-visible:ring-offset-4
-    focus-visible:ring-offset-[#F5F1EA]
+    focus-visible:ring-offset-[#0B0B0B]
     [transform:skewX(-15deg)]
   "
 >
@@ -657,6 +660,7 @@ function MyBookings() {
     </svg>
   </span>
 </Link>
+
 
 
           </div>

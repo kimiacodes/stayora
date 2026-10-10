@@ -650,38 +650,49 @@ function Checkout() {
               </div>
 
               {/* CTA */}
-              <button
-                type="button"
-                onClick={handlePaymentClick}
-                disabled={nights <= 0 || !user}
-                className="
-                  group
-                  relative
-                  mt-8
-                  w-full
-                  overflow-hidden
-                  bg-[#0B0B0B]
-                  px-6
-                  py-5
-                  text-[10px]
-                  uppercase
-                  tracking-[0.3em]
-                  text-white
-                  transition
-                  duration-500
-                  hover:bg-[#8B7355]
-                  disabled:cursor-not-allowed
-                  disabled:bg-[#D8D0C4]
-                "
-              >
-                <span className="absolute inset-y-0 left-0 w-0 bg-white/10 transition-all duration-500 group-hover:w-full" />
+<button
+  type="button"
+  onClick={handlePaymentClick}
+  disabled={nights <= 0 || !user}
+  className="payment-button group"
+>
+  <span className="payment-left">
+    <span className="payment-card">
+      <span className="payment-card-line" />
+      <span className="payment-buttons" />
+      <span className="payment-dollar">$</span>
+    </span>
 
-                <span className="relative z-10">
-                  {paymentOption === 'wallet'
-                    ? 'Pay with Wallet'
-                    : 'Pay & confirm'}
-                </span>
-              </button>
+    <span className="payment-receipt">
+      <span className="payment-post-line" />
+      <span className="payment-screen" />
+      <span className="payment-numbers" />
+      <span className="payment-numbers-second" />
+    </span>
+  </span>
+
+  <span className="payment-right">
+    <span className="payment-label">
+      {paymentOption === 'wallet'
+        ? 'Pay with Wallet'
+        : 'Pay & confirm'}
+    </span>
+
+    <svg
+      className="payment-arrow"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      aria-hidden="true"
+    >
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </svg>
+  </span>
+</button>
+
+
 
               <p className="mt-4 text-center text-[10px] uppercase tracking-[0.15em] text-gray-400">
                 Secure demo reservation

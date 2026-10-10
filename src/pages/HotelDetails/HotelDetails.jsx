@@ -79,12 +79,77 @@ function HotelDetails() {
             It may have been removed or the link may be incorrect.
           </p>
 
-          <Link
-            to="/hotels"
-            className="mt-10 inline-block bg-[#0B0B0B] px-8 py-4 text-xs uppercase tracking-[0.2em] text-white transition hover:bg-[#8B7355]"
-          >
-            Explore stays
-          </Link>
+         
+
+<Link
+  to="/hotels"
+  className="
+    group
+    mt-10
+    inline-flex
+    items-center
+    justify-center
+    gap-4
+    border-none
+    bg-[#F5F1EA]
+    px-6
+    py-3
+    text-sm
+    text-[#0B0B0B]
+    shadow-[6px_6px_0_#0B0B0B]
+    transition-all
+    duration-150
+    ease-in-out
+    hover:shadow-[10px_10px_0_#C5A880]
+    focus:outline-none
+    focus-visible:ring-2
+    focus-visible:ring-[#C5A880]
+    focus-visible:ring-offset-4
+    focus-visible:ring-offset-[#F5F1EA]
+    [transform:skewX(-15deg)]
+  "
+>
+  <span className="[transform:skewX(15deg)]">
+    Explore stays
+  </span>
+
+  <span
+    className="
+      flex
+      w-5
+      items-center
+      justify-center
+      transition-all
+      duration-150
+      group-hover:mr-3
+    "
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      className="
+        w-5
+        shrink-0
+        -translate-x-3
+        transition-all
+        duration-150
+        group-hover:translate-x-0
+        group-hover:animate-[color_anim_0.6s_ease-in-out_infinite]
+      "
+    >
+      <path
+        d="M5 12h14m-6-6 6 6-6 6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </span>
+</Link>
+
+
         </div>
       </main>
     )
@@ -489,27 +554,45 @@ function HotelDetails() {
 
               {/* Book */}
 
-              <button
-                type="button"
-                onClick={() => {
-                  if (!checkIn || !checkOut || nights <= 0) {
-                    return
-                  }
+              
+<button
+  type="button"
+  onClick={() => {
+    if (!checkIn || !checkOut || nights <= 0) {
+      return
+    }
 
-                  const bookingParams = new URLSearchParams({
-                    hotel: String(hotel.id),
-                    checkIn,
-                    checkOut,
-                    guests: String(Math.max(1, Number(guests) || 1)),
-                  })
+    const bookingParams = new URLSearchParams({
+      hotel: String(hotel.id),
+      checkIn,
+      checkOut,
+      guests: String(Math.max(1, Number(guests) || 1)),
+    })
 
-                  navigate(`/checkout?${bookingParams.toString()}`)
-                }}
-                disabled={!checkIn || !checkOut || nights <= 0}
-                className="mt-8 w-full bg-[#0B0B0B] px-6 py-4 text-xs uppercase tracking-[0.2em] text-white transition duration-300 hover:bg-[#8B7355] disabled:cursor-not-allowed disabled:bg-[#D8D0C4]"
-              >
-                Book this stay
-              </button>
+    navigate(`/checkout?${bookingParams.toString()}`)
+  }}
+  disabled={!checkIn || !checkOut || nights <= 0}
+  className="group relative mt-8 flex w-full items-center justify-center overflow-hidden rounded-full border border-[#C5A880] bg-[#0B0B0B] px-6 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#C5A880] shadow-[0_0_0_2px_#C5A880] transition-all duration-500 ease-out hover:rounded-xl hover:text-[#0B0B0B] hover:shadow-[0_0_0_10px_transparent] active:scale-[0.98] disabled:cursor-not-allowed disabled:border-[#D8D0C4] disabled:bg-[#D8D0C4] disabled:text-[#8B7355] disabled:shadow-none"
+>
+  <span className="absolute left-1/2 top-1/2 h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#C5A880] opacity-0 transition-all duration-700 ease-out group-hover:h-[300px] group-hover:w-[300px] group-hover:opacity-100 group-disabled:hidden" />
+
+  <span className="relative z-10 flex items-center gap-3 transition-transform duration-500 ease-out group-hover:translate-x-1">
+    Book this stay
+
+    <svg
+      className="h-4 w-4 shrink-0 transition-transform duration-500 ease-out group-hover:translate-x-1.5"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      aria-hidden="true"
+    >
+      <path d="M5 12h14" />
+      <path d="m12 5 7 7-7 7" />
+    </svg>
+  </span>
+</button>
+
 
               <p className="mt-4 text-center text-[10px] uppercase tracking-[0.15em] text-gray-400">
                 Secure reservation
@@ -581,58 +664,76 @@ function HotelDetails() {
 
         <div className="flex justify-center mx-auto max-w-7xl">
 
-         <Link
-            to="/hotels"
-            className="
-              group
-              relative
-              mt-10
-              inline-flex
-              h-[2.9em]
-              w-[8.5em]
-              items-center
-              justify-end
-              rounded-[11px]
-              border-[0.2em]
-              border-[#8B7355]
-              bg-transparent
-              text-[#0B0B0B]
-              transition-all
-              duration-500
-              ease-in-out
-              hover:bg-[#C5A880]
-              hover:text-[#0B0B0B]
-            "
-          >
+        
+        
+<Link
+  to="/hotels"
+  className="
+    group
+    mt-10
+    inline-flex
+    items-center
+    justify-center
+    gap-4
+    border-none
+    bg-[#0B0B0B]
+    px-6
+    py-3
+    text-sm
+    text-white
+    shadow-[6px_6px_0_#8B7355]
+    transition-all
+    duration-150
+    ease-in-out
+    hover:shadow-[10px_10px_0_#C5A880]
+    focus:outline-none
+    focus-visible:ring-2
+    focus-visible:ring-[#C5A880]
+    focus-visible:ring-offset-4
+    focus-visible:ring-offset-[#0B0B0B]
+    [transform:skewX(-15deg)]
+  "
+>
+  <span className="[transform:skewX(15deg)]">
+    Explore stays
+  </span>
 
-            <span className="mr-[1.5em] text-xs">
-              Explore stays
-            </span>
+  <span
+    className="
+      flex
+      w-5
+      items-center
+      justify-center
+      transition-all
+      duration-150
+      group-hover:mr-3
+    "
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      className="
+        w-5
+        shrink-0
+        -translate-x-3
+        transition-all
+        duration-150
+        group-hover:translate-x-0
+        group-hover:animate-[color_anim_0.6s_ease-in-out_infinite]
+      "
+    >
+      <path
+        d="M5 12h14m-6-6 6 6-6 6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </span>
+</Link>
 
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="
-                absolute
-                left-[0.8em]
-                w-[1.6em]
-                transition-all
-                duration-500
-                ease-in-out
-                group-hover:translate-x-5px
-              "
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M5 12h14m-6-6 6 6-6 6"
-              />
-            </svg>
-
-          </Link>
 
         </div>
 

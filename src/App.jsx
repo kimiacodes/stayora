@@ -1,6 +1,5 @@
 
 import { useState } from 'react'
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { BookingProvider } from './context/BookingContext'
@@ -21,8 +20,8 @@ import Destinations from './pages/Destinations/Destinations'
 import Experiences from './pages/Experiences/Experiences'
 import Wallet from './pages/Wallet/Wallet'
 import Payment from './pages/Payment/Payment'
-
-
+import Aboutus from './pages/Aboutus/Aboutus'
+import Contact from './pages/Contact/Contact'
 
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
@@ -38,41 +37,25 @@ function App() {
       <AuthProvider>
         <WishlistProvider>
           {isLoading && (
-            <Preloader
-              onComplete={() => setIsLoading(false)}
-            />
+            <Preloader onComplete={() => setIsLoading(false)} />
           )}
 
           <BrowserRouter>
             <Navbar />
 
             <Routes>
-              <Route
-                path="/"
-                element={<Home />}
-              />
-
-              <Route
-                path="/hotels"
-                element={<Hotels />}
-              />
-
-              <Route
-                path="/hotels/:id"
-                element={<HotelDetails />}
-              />
-
-              <Route
-                path="/checkout"
-                element={<Checkout />}
-              />
+              <Route path="/" element={<Home />} />
+              <Route path="/hotels" element={<Hotels />} />
+              <Route path="/hotels/:id" element={<HotelDetails />} />
+              <Route path="/checkout" element={<Checkout />} />
               <Route path="/destinations" element={<Destinations />} />
               <Route path="/experiences" element={<Experiences />} />
               <Route path="/wallet" element={<Wallet />} />
               <Route path="/payment" element={<Payment />} />
-              
+              <Route path="/aboutus" element={<Aboutus />} />
 
-              
+              {/* Contact page */}
+              <Route path="/contact" element={<Contact />} />
 
               <Route
                 path="/my-bookings"
@@ -109,19 +92,17 @@ function App() {
                   </ProtectedRoute>
                 }
               />
-              <Route
-  path="/wishlist"
-  element={
-    <ProtectedRoute>
-      <Wishlist />
-    </ProtectedRoute>
-  }
-/>
 
               <Route
-                path="*"
-                element={<NotFound />}
+                path="/wishlist"
+                element={
+                  <ProtectedRoute>
+                    <Wishlist />
+                  </ProtectedRoute>
+                }
               />
+
+              <Route path="*" element={<NotFound />} />
             </Routes>
 
             <Footer />
@@ -133,4 +114,3 @@ function App() {
 }
 
 export default App
-

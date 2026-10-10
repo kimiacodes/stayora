@@ -81,9 +81,10 @@ function Hotels() {
 
                 <h1 className="mt-4 font-serif text-4xl leading-tight text-[#0B0B0B] sm:text-5xl lg:text-6xl">
                   Find your next
-                  <span className="block italic">
+                  <span className="block italic text-[#8B7355]">
                     stay.
                   </span>
+                  
                 </h1>
 
                 <p className="mt-5 max-w-xl text-sm leading-7 text-gray-500">
