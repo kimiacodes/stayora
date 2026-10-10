@@ -12,9 +12,9 @@ function Hero() {
       />
 
       {/* Responsive Overlay */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#080808]/25 via-[#080808]/35 to-[#080808]/75 sm:bg-gradient-to-r sm:from-[#080808]/40 sm:via-[#080808]/20 sm:to-[#080808]/10" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#080808]/5 via-[#080808]/10 to-[#080808]/35 sm:bg-gradient-to-r sm:from-[#080808]/10 sm:via-[#080808]/5 sm:to-transparent" />
 
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#080808]/30 via-transparent to-[#080808]/15" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#080808]/10 via-transparent to-transparent" />
 
       {/* Hero Content */}
       <div className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8 sm:py-24 lg:px-10">
@@ -30,7 +30,7 @@ function Hero() {
             </span>
           </h1>
 
-          <p className="mt-6 max-w-xl text-sm leading-7 text-white/80 sm:mt-7 sm:text-lg sm:leading-8">
+          <p className="mt-6 max-w-xl text-sm leading-7 text-white/85 sm:mt-7 sm:text-lg sm:leading-8">
             Discover beautiful hotels, unique destinations and memorable
             experiences around the world.
           </p>
