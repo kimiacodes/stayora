@@ -28,6 +28,7 @@ import Footer from './components/Footer/Footer'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 import PublicRoute from './components/PublicRoute/PublicRoute'
 import Preloader from './components/Preloader/Preloader'
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -41,6 +42,7 @@ function App() {
           )}
 
           <BrowserRouter>
+           <ScrollToTop />
             <Navbar />
 
             <Routes>

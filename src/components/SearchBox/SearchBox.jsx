@@ -70,20 +70,30 @@ function SearchBox() {
               className="mt-2 w-full bg-transparent text-sm text-gray-900 outline-none placeholder:text-gray-400"
             />
           </div>
-           {/* Guests */}
-          <div className="p-4 sm:p-5 border-b border-gray-200 md:border-b-0 md:border-r">
-            <label className="block md:text-xs text-[11px] uppercase tracking-wider text-gray-500">
-              Guests
-            </label>
+          
+{/* Guests */}
+<div className="border-b border-gray-200 p-4 sm:p-5 md:border-b-0 md:border-r">
+  <label className="block text-[11px] uppercase tracking-wider text-gray-500 md:text-xs">
+    Guests
+  </label>
 
-            <input
-              type="number"
-              min="1"
-              value={guests}
-              onChange={(e) => setGuests(Number(e.target.value))}
-              className="mt-2 w-full bg-transparent text-sm text-gray-900 outline-none"
-            />
-          </div>
+  <input
+    type="number"
+    min="1"
+    value={guests}
+    onChange={(e) => {
+      const value = e.target.value
+      setGuests(value === '' ? '' : Number(value))
+    }}
+    onBlur={() => {
+      if (guests === '' || guests < 1) {
+        setGuests(1)
+      }
+    }}
+    className="mt-2 w-full bg-transparent text-sm text-gray-900 outline-none"
+  />
+</div>
+
 
           {/* Check in */}
           <div className="border-b border-gray-200 p-4 sm:p-5 md:border-b-0 md:border-r">

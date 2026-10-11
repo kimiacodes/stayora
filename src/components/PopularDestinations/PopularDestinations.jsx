@@ -43,34 +43,37 @@ function PopularDestinations() {
           </ScrollReveal>
         </div>
 
-        {/* Moving Cards */}
-        <ScrollReveal direction="up" delay={100}>
-          <div className="relative overflow-hidden">
-            {/* Edge fade */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-8 bg-gradient-to-r from-[#F5F1EA] to-transparent sm:w-12" />
+       
+{/* Moving Cards */}
+<ScrollReveal direction="up" delay={100}>
+  <div className="relative overflow-hidden">
+    {/* Subtle Edge Fade */}
+    <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-3 bg-gradient-to-r from-[#F5F1EA]/50 to-transparent sm:w-5" />
 
-            <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-8 bg-gradient-to-l from-[#F5F1EA] to-transparent sm:w-12" />
+    <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-3 bg-gradient-to-l from-[#F5F1EA]/50 to-transparent sm:w-5" />
 
-            <div className="popular-destinations-track flex w-max gap-5 sm:gap-6">
-              {destinations.map((destination, index) => (
-                <DestinationCard
-                  key={`first-${destination.id}`}
-                  destination={destination}
-                  index={index}
-                />
-              ))}
+    {/* Moving Track */}
+    <div className="popular-destinations-track flex w-max gap-5 sm:gap-6">
+      {destinations.map((destination, index) => (
+        <DestinationCard
+          key={`first-${destination.id}`}
+          destination={destination}
+          index={index}
+        />
+      ))}
 
-              {destinations.map((destination, index) => (
-                <DestinationCard
-                  key={`second-${destination.id}`}
-                  destination={destination}
-                  index={index}
-                  ariaHidden
-                />
-              ))}
-            </div>
-          </div>
-        </ScrollReveal>
+      {destinations.map((destination, index) => (
+        <DestinationCard
+          key={`second-${destination.id}`}
+          destination={destination}
+          index={index}
+          ariaHidden
+        />
+      ))}
+    </div>
+  </div>
+</ScrollReveal>
+
       </div>
 
       <style>{`
